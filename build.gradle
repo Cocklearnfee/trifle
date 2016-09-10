@@ -1,0 +1,104 @@
+// project description
+description = "trifle root project"
+
+// default project tasks
+defaultTasks "clean", "build"
+
+// extensional properties
+ext {
+    publishSnapshots = Boolean.getBoolean("publishSnapshots")
+    publishReleases = Boolean.getBoolean("publishReleases")
+    sonatypeUsername = System.getProperty("sonatypeUsername")
+    sonatypePassword = System.getProperty("sonatypePassword")
+}
+
+// build script for gradle
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+        mavenCentral()
+
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    }
+}
+
+// all projects config
+allprojects {
+    apply plugin: "idea"
+
+    idea {
+        module {
+            downloadSources = true
+            downloadJavadoc = true
+            jdkName = JavaVersion.VERSION_1_8
+            languageLevel = JavaVersion.VERSION_1_8
+        }
+    }
+}
+
+// sub projects config
+subprojects {
+    //子项目使用的插件
+    //java 插件使用之后能够在 dependencies 中使用 compile/testCompile 等方法。
+    //避免在父模块中使用 java 插件，因为父项目没有必要生成 parent_main 和 parent_test 模块
+    apply plugin: 'java'
+
+    apply plugin: 'checkstyle'
+    apply plugin: 'findbugs'
+
+    apply from: rootProject.file("gradle/tasks.gradle")
+
+    //apply plugin: 'java' 之后才有属性 - 代码源兼容版本
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    //apply plugin: 'java' 之后才有属性 - 目标兼容版本
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    // repositories for sub projects
+    repositories {
+        // local maven repository
+        mavenLocal()
+        jcenter()
+
+        // maven central repositories
+        mavenCentral()
+    }
+
+    //所有项目都需要导入的库
+    dependencies {
+        compile "org.slf4j:slf4j-api:${slf4jVersion}"
+        compile "org.slf4j:jul-to-slf4j:${slf4jVersion}"
+        compile "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
+        compile "org.slf4j:log4j-over-slf4j:${slf4jVersion}"
+        compile "ch.qos.logback:logback-classic:${logbackVersion}"
+        testCompile "junit:junit:${junitVersion}"
+    }
+
+    test {
+        enabled = !Boolean.getBoolean("skipTests")
+        useJUnit()
+        scanForTestClasses false
+        include '**/*Tests.*'
+        exclude '**/*Abstract*.*'
+        classpath = it.classpath + files("${projectDir}/src/main/resources") +
+                files("${projectDir}/src/test/resources")
+    }
+}
+
+
+project(":kode-boot-jar") {
+    apply plugin: 'spring-boot'
+}
+
+//idea 插件配置
+idea {
+    project {
+        //使用 gradle 内枚举常量
+        jdkName = JavaVersion.VERSION_1_8
+        languageLevel = JavaVersion.VERSION_1_8
+    }
+}

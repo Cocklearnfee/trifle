@@ -1,0 +1,8 @@
+// 生成 Wrapper，供没有安装 Gradle 的开发人员使用。在项目路径下，执行 gradlew 自动下载 Gradle。
+task wrapper(type: Wrapper) {
+    //定义 gradle 的版本
+    gradleVersion = '2.14'
+
+    //配置下载路径 -bin 为二进制文件， -all 包含源代码
+    distributionUrl = "https://services.gradle.org/distributions/gradle-$gradleVersion-all.zip"
+}
