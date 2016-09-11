@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: org.pac4j:spring-webmvc-pac4j:1.0.1">
+    <CLASSES>
+      <root url="jar://F:/Repository/caches/modules-2/files-2.1/org.pac4j/spring-webmvc-pac4j/1.0.1/88638f00e5312001a239c28fe6899dab94ba79b0/spring-webmvc-pac4j-1.0.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://F:/Repository/caches/modules-2/files-2.1/org.pac4j/spring-webmvc-pac4j/1.0.1/f6df9dd992aeb511e350948011c51edc93bde66d/spring-webmvc-pac4j-1.0.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://F:/Repository/caches/modules-2/files-2.1/org.pac4j/spring-webmvc-pac4j/1.0.1/3890645f06dacb15b42af28336d0656396b189df/spring-webmvc-pac4j-1.0.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

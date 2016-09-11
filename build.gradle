@@ -29,6 +29,9 @@ buildscript {
 
 // all projects config
 allprojects {
+    group 'trifle'
+    version '1.0.0'
+
     apply plugin: "idea"
 
     idea {
@@ -36,7 +39,6 @@ allprojects {
             downloadSources = true
             downloadJavadoc = true
             jdkName = JavaVersion.VERSION_1_8
-            languageLevel = JavaVersion.VERSION_1_8
         }
     }
 }
@@ -68,16 +70,6 @@ subprojects {
         mavenCentral()
     }
 
-    //所有项目都需要导入的库
-    dependencies {
-        compile "org.slf4j:slf4j-api:${slf4jVersion}"
-        compile "org.slf4j:jul-to-slf4j:${slf4jVersion}"
-        compile "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
-        compile "org.slf4j:log4j-over-slf4j:${slf4jVersion}"
-        compile "ch.qos.logback:logback-classic:${logbackVersion}"
-        testCompile "junit:junit:${junitVersion}"
-    }
-
     test {
         enabled = !Boolean.getBoolean("skipTests")
         useJUnit()
@@ -87,18 +79,41 @@ subprojects {
         classpath = it.classpath + files("${projectDir}/src/main/resources") +
                 files("${projectDir}/src/test/resources")
     }
-}
+
+    // 配置项目依赖配置
+    configurations {
+        // 添加 provided 配置，用来在 dependencies 中区别声明依赖类型
+        providedCompile
+
+        // 将给定的 provided 配置添加到 compile 中
+        compile.extendsFrom(providedCompile)
+    }
+
+    // 配置 jar 任务
+    jar {
+        manifest {
+            attributes("Implementation-Title": project.name,
+                    "Implementation-Vendor": project.group,
+                    "Created-By": project.group,
+                    "Implementation-Version": project.version)
+        }
+    }
+
+    dependencies {
+        compile fileTree("libs")
+
+        compile "org.slf4j:slf4j-api:${slf4jVersion}"
+
+        providedCompile "javax.servlet:javax.servlet-api:${javaxServletVersion}"
+
+        runtime "org.slf4j:jul-to-slf4j:${slf4jVersion}"
+        runtime "org.slf4j:jcl-over-slf4j:${slf4jVersion}"
+        runtime "org.slf4j:log4j-over-slf4j:${slf4jVersion}"
+        runtime "ch.qos.logback:logback-classic:${logbackVersion}"
 
 
-project(":kode-boot-jar") {
-    apply plugin: 'spring-boot'
-}
+        testCompile "junit:junit:${junitVersion}"
+        testCompile "org.springframework:spring-test:${springVersion}"
 
-//idea 插件配置
-idea {
-    project {
-        //使用 gradle 内枚举常量
-        jdkName = JavaVersion.VERSION_1_8
-        languageLevel = JavaVersion.VERSION_1_8
     }
 }

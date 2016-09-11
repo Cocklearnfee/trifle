@@ -1,0 +1,58 @@
+description = "trifle core"
+
+dependencies {
+    compile(group: 'org.springframework', name: 'spring-core', version: springVersion) {
+        exclude(group: 'commons-logging', module: 'commons-logging')
+    }
+    compile group: 'org.springframework', name: 'spring-beans', version: springVersion
+    compile group: 'org.springframework', name: 'spring-context-support', version: springVersion
+    compile group: 'org.springframework', name: 'spring-context', version: springVersion
+    compile group: 'org.springframework', name: 'spring-web', version: springVersion
+    compile group: 'org.springframework', name: 'spring-webmvc', version: springVersion
+
+    compile "org.springframework.boot:spring-boot-starter-security:${springBootVersion}"
+    compile "org.mybatis:mybatis:${mybatisVersion}"
+    compile "mysql:mysql-connector-java:${mysqlConnector}"
+    compile "org.mybatis:mybatis-spring:${mybatisSpringVersion}"
+    compile "com.alibaba:druid:${druidVersion}"
+    compile "org.springframework:spring-jdbc:${springVersion}"
+    compile("org.hibernate:hibernate-validator:${hibernateValidation}") {
+        exclude module: 'org.jboss.logging:jboss-logging'
+    }
+    compile "org.hibernate:hibernate-validator-annotation-processor:${hibernateValidation}"
+
+    testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
+
+
+    compile(group: 'org.pac4j', name: 'spring-webmvc-pac4j', version: springWebmvcPac4jVersion) {
+        exclude(group: 'org.springframework', module: 'spring-webmvc')
+        exclude(group: 'org.springframework', module: 'spring-core')
+        exclude(group: 'org.pac4j', module: 'pac4j-core')
+    }
+    compile group: 'org.pac4j', name: 'pac4j-core', version: pac4jVersion
+    compile(group: 'org.pac4j', name: 'pac4j-http', version: pac4jVersion) {
+    }
+    compile group: 'com.lmax', name: 'disruptor', version: disruptorVersion
+    runtime group: 'org.springframework', name: 'spring-expression', version: springVersion
+    runtime group: 'javax.servlet', name: 'jstl', version: javaxJstlVersion
+    runtime group: 'org.apereo.cas', name: 'cas-server-security-filter', version: casSecurityFilterVersion
+
+    /*
+    compile(group: 'org.quartz-scheduler', name: 'quartz', version:quartzVersion) {
+        exclude(group: 'org.slf4j', module: 'slf4j-api')
+        exclude(group: 'c3p0', module: 'c3p0')
+    }
+    compile group: 'commons-codec', name: 'commons-codec', version:commonsCodecVersion
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version:jacksonDatabindVersion
+    compile group: 'org.hjson', name:'hjson', version:hjsonVersion
+    compile group: 'com.google.guava', name: 'guava', version:guavaVersion
+    compile group: 'commons-io', name: 'commons-io', version:commonsIoVersion
+    compile(group: 'org.apache.httpcomponents', name: 'httpclient', version:httpclientVersion) {
+        exclude(group: 'commons-codec', module: 'commons-codec')
+    }
+    compile group: 'org.apache.commons', name: 'commons-lang3', version:commonsLangVersion
+    compile group: 'org.springframework', name: 'spring-webmvc', version:springVersion
+    compile group: 'org.springframework', name: 'spring-tx', version:springVersion
+    */
+}
+

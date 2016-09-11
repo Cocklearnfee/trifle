@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apereo.cas:cas-server-security-filter:2.0.6">
+    <CLASSES>
+      <root url="jar://F:/Repository/caches/modules-2/files-2.1/org.apereo.cas/cas-server-security-filter/2.0.6/f812a9a45707aae31679e609a14f70baf52c6ca0/cas-server-security-filter-2.0.6.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://F:/Repository/caches/modules-2/files-2.1/org.apereo.cas/cas-server-security-filter/2.0.6/b6fe9edee6b9e94a1d276f5c1497cfbaeab2af82/cas-server-security-filter-2.0.6-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://F:/Repository/caches/modules-2/files-2.1/org.apereo.cas/cas-server-security-filter/2.0.6/79415a1547d9e7a386b4af00d2053eece7b9e87c/cas-server-security-filter-2.0.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
