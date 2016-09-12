@@ -1,3 +1,4 @@
 rootProject.name = 'trifle'
 include 'trifle-core'
+include 'trifle-asset'
 

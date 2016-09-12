@@ -24,6 +24,10 @@ dependencies {
 
     testCompile "org.springframework.boot:spring-boot-starter-test:${springBootVersion}"
 
+    compile("org.apache.httpcomponents:httpclient:${httpclientVersion}") {
+        exclude(group: 'commons-codec', module: 'commons-codec')
+        exclude(group: 'commons-logging', module: 'commons-logging')
+    }
 
     compile(group: 'org.pac4j', name: 'spring-webmvc-pac4j', version: springWebmvcPac4jVersion) {
         exclude(group: 'org.springframework', module: 'spring-webmvc')

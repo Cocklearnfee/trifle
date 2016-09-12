@@ -19,6 +19,8 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
+      <module name="trifle-asset_main" target="1.8" />
+      <module name="trifle-asset_test" target="1.8" />
       <module name="trifle-core_main" target="1.8" />
       <module name="trifle-core_test" target="1.8" />
     </bytecodeTargetLevel>

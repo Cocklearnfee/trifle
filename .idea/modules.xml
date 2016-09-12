@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/trifle.iml" filepath="$PROJECT_DIR$/.idea/modules/trifle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/trifle-asset/trifle-asset.iml" filepath="$PROJECT_DIR$/.idea/modules/trifle-asset/trifle-asset.iml" group="trifle-asset" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/trifle-asset/trifle-asset_main.iml" filepath="$PROJECT_DIR$/.idea/modules/trifle-asset/trifle-asset_main.iml" group="trifle-asset" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/trifle-asset/trifle-asset_test.iml" filepath="$PROJECT_DIR$/.idea/modules/trifle-asset/trifle-asset_test.iml" group="trifle-asset" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/trifle-core/trifle-core.iml" filepath="$PROJECT_DIR$/.idea/modules/trifle-core/trifle-core.iml" group="trifle-core" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/trifle-core/trifle-core_main.iml" filepath="$PROJECT_DIR$/.idea/modules/trifle-core/trifle-core_main.iml" group="trifle-core" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/trifle-core/trifle-core_test.iml" filepath="$PROJECT_DIR$/.idea/modules/trifle-core/trifle-core_test.iml" group="trifle-core" />
