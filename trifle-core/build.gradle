@@ -1,6 +1,7 @@
 description = "trifle core"
 
 dependencies {
+    compile fileTree("../libs")
     compile(group: 'org.springframework', name: 'spring-core', version: springVersion) {
         exclude(group: 'commons-logging', module: 'commons-logging')
     }

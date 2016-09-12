@@ -27,7 +27,6 @@ public class WebUtils {
 	private static final String METHOD_POST = "POST";
 	private static final String METHOD_GET = "GET";
 
-
 	private WebUtils() {
 	}
 
@@ -92,23 +91,143 @@ public class WebUtils {
 	 */
 	public static String getBasePath(HttpServletRequest request) {
 		String path = request.getContextPath();
-		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-		return basePath;
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+		return basePath + path + "/";
 	}
 
+	/**
+	 * 从 url 中提取所有的参数。
+	 *
+	 * @param query url 地址
+	 * @return 参数映射
+	 */
+	public static Map<String, String> splitQueryUrl(String query) {
+		Map<String, String> result = new HashMap<>();
 
-	private static class DefaultTrustManager implements X509TrustManager {
-		public X509Certificate[] getAcceptedIssuers() {
+		String[] pairs = query.split("&");
+		if (pairs.length > 0) {
+			for (String pair : pairs) {
+				String[] param = pair.split("=", 2);
+				if (param.length == 2) {
+					result.put(param[0], param[1]);
+				}
+			}
+		}
+
+		return result;
+	}
+
+	/**
+	 * 从 url 中获取参数
+	 *
+	 * @param url 传入请求地址
+	 * @return 参数列表
+	 */
+	public static Map<String, String> getParamsFromUrl(String url) {
+		Map<String, String> map = null;
+		if (url != null && url.indexOf('?') != -1) {
+			map = splitQueryUrl(url.substring(url.indexOf('?') + 1));
+		}
+		if (map == null) {
+			map = new HashMap<>();
+		}
+		return map;
+	}
+
+	/**
+	 * 生成请求 url
+	 *
+	 * @param params  参数列表
+	 * @param charset 字符集
+	 * @return 请求 url
+	 */
+	public static String buildQueryUrl(Map<String, String> params, String charset) {
+		if (params == null || params.isEmpty()) {
 			return null;
 		}
 
-		public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+		StringBuilder query = new StringBuilder();
+		Set<Map.Entry<String, String>> entries = params.entrySet();
+		boolean hasParam = false;
+
+		for (Map.Entry<String, String> entry : entries) {
+			String name = entry.getKey();
+			String value = entry.getValue();
+			// 忽略参数名或参数值为空的参数
+			if (name != null && !"".equals(name) && value != null && !"".equals(value)) {
+				if (hasParam) {
+					query.append("&");
+				} else {
+					hasParam = true;
+				}
+
+				query.append(name).append("=").append(encodeUrl(value, charset));
+			}
 		}
 
-		public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-		}
+		return query.toString();
 	}
 
+	/**
+	 * 使用指定的字符集反编码请求参数值。
+	 *
+	 * @param value   参数值
+	 * @param charset 字符集
+	 * @return 反编码后的参数值
+	 */
+	public static String decodeUrl(String value, String charset) {
+		String result = null;
+		if (!StringUtils.isEmpty(value)) {
+			try {
+				result = URLDecoder.decode(value, charset);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		return result;
+	}
+
+	/**
+	 * 使用默认的UTF-8字符集反编码请求参数值。
+	 *
+	 * @param value 参数值
+	 * @return 反编码后的参数值
+	 */
+	public static String decodeUrl(String value) {
+		return decodeUrl(value, DEFAULT_CHARSET);
+	}
+
+	/**
+	 * 使用指定的字符集编码请求参数值。
+	 *
+	 * @param value   参数值
+	 * @param charset 字符集
+	 * @return 编码后的参数值
+	 */
+	public static String encodeUrl(String value, String charset) {
+		String result = null;
+		if (!StringUtils.isEmpty(value)) {
+			try {
+				result = URLEncoder.encode(value, charset);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		return result;
+	}
+
+
+	/**
+	 * 使用默认的UTF-8字符集编码请求参数值。
+	 *
+	 * @param value 参数值
+	 * @return 编码后的参数值
+	 */
+	public static String encodeUrl(String value) {
+		return encodeUrl(value, DEFAULT_CHARSET);
+	}
+
+	//region get and post
 
 	/**
 	 * 执行HTTP POST请求。
@@ -138,7 +257,7 @@ public class WebUtils {
 	public static String doPost(String url, Map<String, String> params, String charset, int connectTimeout,
 								int readTimeout, Map<String, String> headerMap) throws IOException {
 		String ctype = "application/x-www-form-urlencoded;charset=" + charset;
-		String query = buildQuery(params, charset);
+		String query = buildQueryUrl(params, charset);
 		byte[] content = {};
 		if (query != null) {
 			content = query.getBytes(charset);
@@ -334,7 +453,7 @@ public class WebUtils {
 
 		try {
 			String ctype = "application/x-www-form-urlencoded;charset=" + charset;
-			String query = buildQuery(params, charset);
+			String query = buildQueryUrl(params, charset);
 			try {
 				conn = getConnection(buildGetUrl(url, query), METHOD_GET, ctype, null);
 			} catch (IOException e) {
@@ -417,32 +536,7 @@ public class WebUtils {
 		return new URL(strUrl);
 	}
 
-	public static String buildQuery(Map<String, String> params, String charset) throws IOException {
-		if (params == null || params.isEmpty()) {
-			return null;
-		}
-
-		StringBuilder query = new StringBuilder();
-		Set<Map.Entry<String, String>> entries = params.entrySet();
-		boolean hasParam = false;
-
-		for (Map.Entry<String, String> entry : entries) {
-			String name = entry.getKey();
-			String value = entry.getValue();
-			// 忽略参数名或参数值为空的参数
-			if (StringUtils.areNotEmpty(name, value)) {
-				if (hasParam) {
-					query.append("&");
-				} else {
-					hasParam = true;
-				}
-
-				query.append(name).append("=").append(URLEncoder.encode(value, charset));
-			}
-		}
-
-		return query.toString();
-	}
+	//endregion
 
 	protected static String getResponseAsString(HttpURLConnection conn) throws IOException {
 		String charset = getResponseCharset(conn.getContentType());
@@ -500,95 +594,17 @@ public class WebUtils {
 		return charset;
 	}
 
-	/**
-	 * 使用默认的UTF-8字符集反编码请求参数值。
-	 *
-	 * @param value 参数值
-	 * @return 反编码后的参数值
-	 */
-	public static String decode(String value) {
-		return decode(value, DEFAULT_CHARSET);
-	}
 
-	/**
-	 * 使用默认的UTF-8字符集编码请求参数值。
-	 *
-	 * @param value 参数值
-	 * @return 编码后的参数值
-	 */
-	public static String encode(String value) {
-		return encode(value, DEFAULT_CHARSET);
-	}
-
-	/**
-	 * 使用指定的字符集反编码请求参数值。
-	 *
-	 * @param value   参数值
-	 * @param charset 字符集
-	 * @return 反编码后的参数值
-	 */
-	public static String decode(String value, String charset) {
-		String result = null;
-		if (!StringUtils.isEmpty(value)) {
-			try {
-				result = URLDecoder.decode(value, charset);
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-		}
-		return result;
-	}
-
-	/**
-	 * 使用指定的字符集编码请求参数值。
-	 *
-	 * @param value   参数值
-	 * @param charset 字符集
-	 * @return 编码后的参数值
-	 */
-	public static String encode(String value, String charset) {
-		String result = null;
-		if (!StringUtils.isEmpty(value)) {
-			try {
-				result = URLEncoder.encode(value, charset);
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-		}
-		return result;
-	}
-
-	private static Map<String, String> getParamsFromUrl(String url) {
-		Map<String, String> map = null;
-		if (url != null && url.indexOf('?') != -1) {
-			map = splitUrlQuery(url.substring(url.indexOf('?') + 1));
-		}
-		if (map == null) {
-			map = new HashMap<String, String>();
-		}
-		return map;
-	}
-
-	/**
-	 * 从URL中提取所有的参数。
-	 *
-	 * @param query URL地址
-	 * @return 参数映射
-	 */
-	public static Map<String, String> splitUrlQuery(String query) {
-		Map<String, String> result = new HashMap<>();
-
-		String[] pairs = query.split("&");
-		if (pairs != null && pairs.length > 0) {
-			for (String pair : pairs) {
-				String[] param = pair.split("=", 2);
-				if (param != null && param.length == 2) {
-					result.put(param[0], param[1]);
-				}
-			}
+	private static class DefaultTrustManager implements X509TrustManager {
+		public X509Certificate[] getAcceptedIssuers() {
+			return null;
 		}
 
-		return result;
+		public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+		}
+
+		public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+		}
 	}
 
 }
