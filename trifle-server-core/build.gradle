@@ -34,9 +34,9 @@ dependencies {
         exclude(group: 'org.springframework', module: 'spring-core')
         exclude(group: 'org.pac4j', module: 'pac4j-core')
     }
-    compile group: 'org.pac4j', name: 'pac4j-core', version: pac4jVersion
-    compile(group: 'org.pac4j', name: 'pac4j-http', version: pac4jVersion) {
-    }
+//    compile group: 'org.pac4j', name: 'pac4j-core', version: pac4jVersion
+//    compile(group: 'org.pac4j', name: 'pac6j-http', version: pac4jVersion) {
+//    }
     compile group: 'com.lmax', name: 'disruptor', version: disruptorVersion
     runtime group: 'org.springframework', name: 'spring-expression', version: springVersion
     runtime group: 'javax.servlet', name: 'jstl', version: javaxJstlVersion

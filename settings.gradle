@@ -1,4 +1,8 @@
 rootProject.name = 'trifle'
-include 'trifle-core'
+include 'trifle-server-core'
 include 'trifle-asset'
+include 'trifle-manage'
+include 'trifle-server-core'
+include 'trifle-manage-web'
+include 'trifle-manage-web'
 
