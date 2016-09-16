@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/trifle.iml" filepath="$PROJECT_DIR$/.idea/modules/trifle.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/trifle-asset/trifle-asset.iml" filepath="$PROJECT_DIR$/.idea/modules/trifle-asset/trifle-asset.iml" group="trifle-asset" />
+      <module fileurl="file://$PROJECT_DIR$/trifle-asset-web/trifle-asset-web.iml" filepath="$PROJECT_DIR$/trifle-asset-web/trifle-asset-web.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/trifle-asset/trifle-asset_main.iml" filepath="$PROJECT_DIR$/.idea/modules/trifle-asset/trifle-asset_main.iml" group="trifle-asset" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/trifle-asset/trifle-asset_test.iml" filepath="$PROJECT_DIR$/.idea/modules/trifle-asset/trifle-asset_test.iml" group="trifle-asset" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/trifle-manage/trifle-manage.iml" filepath="$PROJECT_DIR$/.idea/modules/trifle-manage/trifle-manage.iml" group="trifle-manage" />
