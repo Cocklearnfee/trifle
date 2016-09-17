@@ -1,0 +1,17 @@
+$background-color: #ccc;
+$font-color-default: #333;
+$font-background-default: #fff;
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	background: $background-color;
+}
+
+p {
+	color: $font-color-default;
+	background: $font-background-default;
+}
