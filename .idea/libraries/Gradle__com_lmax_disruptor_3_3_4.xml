@@ -2,12 +2,15 @@
   <library name="Gradle: com.lmax:disruptor:3.3.4">
     <CLASSES>
       <root url="jar://F:/Repository/caches/modules-2/files-2.1/com.lmax/disruptor/3.3.4/be71143c8ba540e34ced6fabf74ba9aa238156b6/disruptor-3.3.4.jar!/" />
+      <root url="jar://F:/GradleRepo/caches/modules-2/files-2.1/com.lmax/disruptor/3.3.4/be71143c8ba540e34ced6fabf74ba9aa238156b6/disruptor-3.3.4.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://F:/Repository/caches/modules-2/files-2.1/com.lmax/disruptor/3.3.4/1231afe62c7a8ddceed1d1bbc1d8e4a060f74cdb/disruptor-3.3.4-javadoc.jar!/" />
+      <root url="jar://F:/GradleRepo/caches/modules-2/files-2.1/com.lmax/disruptor/3.3.4/1231afe62c7a8ddceed1d1bbc1d8e4a060f74cdb/disruptor-3.3.4-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
       <root url="jar://F:/Repository/caches/modules-2/files-2.1/com.lmax/disruptor/3.3.4/86b3d6c0246f34203b9b4f76260563a0a9a7307a/disruptor-3.3.4-sources.jar!/" />
+      <root url="jar://F:/GradleRepo/caches/modules-2/files-2.1/com.lmax/disruptor/3.3.4/86b3d6c0246f34203b9b4f76260563a0a9a7307a/disruptor-3.3.4-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

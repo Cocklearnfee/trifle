@@ -1,6 +1,12 @@
-//导入模块
-var gulp = require('gulp'), //安装的模块
-		sass = require('gulp-sass');
+var gulp = require('gulp'); 					//gulp 模块
+var sass = require('gulp-sass'); 				//sass 编译模块
+var concat = require('gulp-concat');           	//合并
+var jshint = require('gulp-jshint');           	//js规范验证
+var uglify = require('gulp-uglify');           	//压缩
+var rename = require('gulp-rename');          	//文件名命名
+var watch = require('gulp-watch');				//监听
+var amdOptimize = require('gulp-amd-optimizer'); //require优化
+var concatSourceMap = require('gulp-concat-sourcemap'); //源图支持
 
 //定义任务
 gulp.task("sass:compile", function () {

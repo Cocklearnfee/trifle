@@ -2,12 +2,15 @@
   <library name="Gradle: org.mybatis:mybatis:3.4.1">
     <CLASSES>
       <root url="jar://F:/Repository/caches/modules-2/files-2.1/org.mybatis/mybatis/3.4.1/c5624f69848187a6bf1865cf64467beecdb9fa68/mybatis-3.4.1.jar!/" />
+      <root url="jar://F:/GradleRepo/caches/modules-2/files-2.1/org.mybatis/mybatis/3.4.1/c5624f69848187a6bf1865cf64467beecdb9fa68/mybatis-3.4.1.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://F:/Repository/caches/modules-2/files-2.1/org.mybatis/mybatis/3.4.1/d6a1ad17678604f1a97fda0fdfbb9430560bc215/mybatis-3.4.1-javadoc.jar!/" />
+      <root url="jar://F:/GradleRepo/caches/modules-2/files-2.1/org.mybatis/mybatis/3.4.1/d6a1ad17678604f1a97fda0fdfbb9430560bc215/mybatis-3.4.1-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
       <root url="jar://F:/Repository/caches/modules-2/files-2.1/org.mybatis/mybatis/3.4.1/def7644f88b49d068b3f06948b631bf762e02eef/mybatis-3.4.1-sources.jar!/" />
+      <root url="jar://F:/GradleRepo/caches/modules-2/files-2.1/org.mybatis/mybatis/3.4.1/def7644f88b49d068b3f06948b631bf762e02eef/mybatis-3.4.1-sources.jar!/" />
     </SOURCES>
   </library>
 </component>
