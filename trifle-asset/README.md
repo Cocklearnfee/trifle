@@ -7,6 +7,9 @@
 - 安装 nodejs。 使用 ` node -v ` 能正常返回 nodejs 的版本表示安装成功。
 - 根据项目中的 `package.json` 执行命令 `npm install` 安装项目构建依赖（超级管理员权限）。 
 	在此安装过程中，可能会安装失败，有些错误可能是需要运行安装脚本，此时需要超级管理员权限。
+	如果安装过程很慢或者停住不动，可能是网关原因导致，可以切换到 taobao 的 npm 服务器上。
+	`npm install -g cnpm --registry=https://registry.npm.taobao.org //安装 cnpm`
+	之后所有用到 npm 的，可以替换为 cnpm 执行。
 - 根据项目中的 `bower.json` 执行命令 `bower install` 安装项目开发依赖。
 
 #### 文件结构说明
