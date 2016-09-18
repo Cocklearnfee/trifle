@@ -1,17 +1,20 @@
 {
-	"name": "trifle-asset",
-	"description": "asset sample",
-	"main": "index.js",
-	"authors": [
-		"kostark <10692081@qq.com>"
-	],
-	"license": "ISC",
-	"homepage": "https://github.com/kostark/trifle",
-	"ignore": [
-		"**/.*",
-		"node_modules",
-		"bower_components",
-		"test",
-		"tests"
-	]
+  "name": "trifle-asset",
+  "description": "asset sample",
+  "main": "index.js",
+  "authors": [
+    "kostark <10692081@qq.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/kostark/trifle",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "v4.0.0-alpha.4"
+  }
 }

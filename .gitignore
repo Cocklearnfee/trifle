@@ -8,6 +8,7 @@ classes
 
 # nodejs
 node_modules
+vendor
 
 # Package Files #
 # *.jar
