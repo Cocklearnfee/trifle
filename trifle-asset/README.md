@@ -29,8 +29,6 @@
 
 	> 在 IDEA 中，定位到 gulpfile.js 文件，右键 Show Gulp Tasks 即可显示任务，每个任务后灰色显示的为依赖任务。
 
-
-
 ##### 相关插件文档。
 
 * [Gulp](http://gulpjs.org/) 官方网站，包括文档和介绍
