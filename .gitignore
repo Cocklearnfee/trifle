@@ -5,6 +5,7 @@ build
 target
 classes
 *.class
+.gradle
 
 # nodejs
 node_modules
