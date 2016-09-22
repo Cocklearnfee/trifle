@@ -13,6 +13,7 @@ var sourceMaps = require('gulp-sourcemaps');				//源图生成
 var cleanCss = require('gulp-clean-css');					//css 压缩
 var runSequence = require('run-sequence');					//顺序执行
 var mergeStream = require('merge-stream');					//合并多个流，返回该留时能够保证顺序执行
+var typescript = require('gulp-typescript');				//Typescript 编译工具
 var gulpIf = require('gulp-if');							//gulp 条件判断
 var zip = require('gulp-zip');								//压缩
 var parseArgs = require('minimist');						//解析命令行参数
@@ -39,45 +40,174 @@ var configuration = parseArgs(process.argv.slice(2), {
 	}
 });
 
+//资源配置
+var resources = {
+	html: { //网页
+		page: { //页面配置
+			batch: ['./app/html/part'], //handlebars 组件位置
+			src: ['./app/html/**/*.hb'], //handlebars 文件位置
+			dest: './html' //目标位置
+		}
+	},
+	style: { //样式
+		common: { //页面内通用样式
+			src: ['./app/style/**/*.scss'], //源文件
+			dest: './dist/style', //目标位置
+			concat: 'app.min.css' //合并后文件名
+		},
+		page: { //每个页面对应的样式
+			src: ['./app/style/page/**/*.scss'],
+			dest: './dist/style/page'
+		},
+		libs: { //通用样式库
+			src: ['./app/style/test/**/*.scss'],
+			dest: './dist/style',
+			concat: 'libs.min.css'
+		},
+		bootstrap: { //bootstrap 库配置信息
+			src: ['./vendor/bootstrap/dist/css/bootstrap.css'],
+			dest: './dist/style',
+			concat: 'bootstrap.min.css'
+		}
+	},
+	script: { //脚本
+		common: { //项目内脚本
+			src: ['./app/script/**/*.ts'],
+			dest: './dist/script'
+		},
+		page: { //每个页面对应的脚本
+			src: [''],
+			dest: './dist/script/'
+		},
+		libs: { //通用脚本库
+			src: ['', '', ''],
+			dest: './dist/script',
+			concat: 'lib.min.js'
+		},
+		jquery: { //jquery 库配置信息
+			src: [''],
+			dest: './dist/script',
+			concat: 'jquery.min.js'
+		}
+	}
+};
+
 //TODO: 项目内区分通用和页面独立使用，通用压缩合并到一个文件中，独立的分别打包，每个页面个
 //region 资源文件编译压缩
+
+//region html 编译
 
 /** handlebars 模板编译 */
 gulp.task('html', function () {
 	var options = {
 		ignorePartials: true, //忽略找不到的模板
-		batch: ['./app/html/part']
+		batch: resources.html.page.batch
 	};
 
-	return gulp.src('./app/html/*.hb')
+	return gulp.src(resources.html.page.src)
 			.pipe(handlebars(handlebars_data, options))
 			.pipe(rename({extname: '.html'}))
-			.pipe(gulp.dest('./html'));
+			.pipe(gulp.dest(resources.html.page.dest));
 });
+
+//endregion
+
+//region css 编译
 
 /** css 编译合并压缩同步浏览器 */
 gulp.task('css:app', function () {
-	return gulp.src(['./app/style/**/*.scss'])
+	var commonCss = gulp.src(resources.style.common.src)
 			.pipe(gulpIf(!configuration.release, sourceMaps.init({loadMaps: true})))
 			.pipe(sass())
 			.pipe(cleanCss())
-			.pipe(concat('app.min.css'))
+			.pipe(concat(resources.style.common.concat))
 			.pipe(gulpIf(!configuration.release, sourceMaps.write()))
-			.pipe(gulp.dest('./dist/style'))
+			.pipe(gulp.dest(resources.style.common.dest))
+			.pipe(reload({stream: true}));
+
+	var pageCss = gulp.src(resources.style.page.src)
+			.pipe(gulpIf(!configuration.release, sourceMaps.init({loadMaps: true})))
+			.pipe(sass())
+			.pipe(cleanCss())
+			.pipe(gulpIf(!configuration.release, sourceMaps.write()))
+			.pipe(gulp.dest(resources.style.page.dest))
+			.pipe(reload({stream: true}));
+
+	return mergeStream(commonCss, pageCss);
+});
+
+/** css 库压缩合并，分类型压缩 */
+gulp.task('css:lib', function () {
+	var libsCss = gulp.src(resources.style.libs.src)
+			.pipe(gulpIf(!configuration.release, sourceMaps.init({loadMaps: true})))
+			.pipe(cleanCss())
+			.pipe(concat(resources.style.libs.concat))
+			.pipe(gulpIf(!configuration.release, sourceMaps.write()))
+			.pipe(gulp.dest(resources.style.libs.dest))
+			.pipe(reload({stream: true}));
+
+	var bootstrapCss = gulp.src(resources.style.bootstrap.src)
+			.pipe(gulpIf(!configuration.release, sourceMaps.init({loadMaps: true})))
+			.pipe(cleanCss())
+			.pipe(concat(resources.style.bootstrap.concat))
+			.pipe(gulpIf(!configuration.release, sourceMaps.write()))
+			.pipe(gulp.dest(resources.style.bootstrap.dest))
+			.pipe(reload({stream: true}));
+
+	return mergeStream(libsCss, bootstrapCss)
+});
+
+//endregion
+
+//region js 编译
+
+/** js 压缩同步，区分项目内通用文件和每个页面对应的文件。 */
+gulp.task('js:app', function () {
+	/*	var commonJs = gulp.src(resources.script.common.src)
+	 .pipe(typescript({}))
+	 .pipe(jshint())
+	 .pipe(uglify())
+	 .pipe(gulp.dest(resources.script.common.dest))
+	 .pipe(reload({stream: true}));
+
+	 var pageJs = gulp.src(resources.script.page.src)
+	 .pipe(jshint())
+	 .pipe(uglify())
+	 .pipe(gulp.dest(resources.script.page.dest))
+	 .pipe(reload({stream: true}));
+
+	 return mergeStream(commonJs, pageJs);*/
+
+	return mergeStream(gulp.src(resources.script.common.src), gulp.src(resources.script.page.src))
+			.pipe(gulpIf(!configuration.release, sourceMaps.init({loadMaps: true})))
+			.pipe(typescript({target: 'ES5', module: 'umd'}))
+			.pipe(jshint())
+			.pipe(uglify())
+			.pipe(gulpIf(!configuration.release, sourceMaps.write()))
+			.pipe(gulp.dest(resources.script.common.dest))
 			.pipe(reload({stream: true}));
 });
 
-/** css 库压缩合并*/
-gulp.task('css:lib', function () {
-	//TODO: 根据不同的类型的库分组打包
-	return gulp.src(['./vendor/bootstrap/dist/css/bootstrap.css'])
-			.pipe(gulpIf(!configuration.release, sourceMaps.init({loadMaps: true})))
-			.pipe(cleanCss())
-			.pipe(concat('lib.min.css'))
-			.pipe(gulpIf(!configuration.release, sourceMaps.write()))
-			.pipe(gulp.dest('./dist/style'))
+/** js lib 压缩同步，支持不同类型的库进行打包 */
+gulp.task('js:lib', function () {
+	var libStream = gulp.src(resources.script.libs.src)
+			.pipe(uglify())
+			.pipe(concat(resources.script.libs.concat))
+			.pipe(gulp.dest(resources.script.libs.dest))
 			.pipe(reload({stream: true}));
+
+	var jqueryStream = gulp.src(resources.script.jquery.src)
+			.pipe(uglify())
+			.pipe(concat(resources.script.jquery.concat))
+			.pipe(gulp.dest(resources.script.jquery.dest))
+			.pipe(reload({stream: true}));
+
+	return mergeStream(libStream, jqueryStream);
 });
+
+//endregion
+
+//region img 压缩
 
 /** 图片资源文件 */
 gulp.task('img:common', function () {
@@ -86,25 +216,7 @@ gulp.task('img:common', function () {
 gulp.task('img:sprite', function () {
 });
 
-/** js 压缩同步 */
-gulp.task('js:app', function () {
-	//TODO: 区分对待项目内通用的脚本和项目内每个页面对应的独立脚本
-	gulp.src(['./app/script/**/*.js'], {base: 'app'})
-			.pipe(jshint())
-			.pipe(uglify())
-			.pipe(gulp.dest('./dist/script'))
-			.pipe(reload({stream: true}));
-});
-
-/** js lib 压缩同步 */
-gulp.task('js:lib', function () {
-	//TODO: 根据不同的类型的库分组打包
-	gulp.src(['', '', ''])
-			.pipe(uglify())
-			.pipe(concat('lib.min.js'))
-			.pipe(gulp.dest('./dist/script'))
-			.pipe(reload({stream: true}));
-});
+//endregion
 
 //endregion
 
@@ -123,7 +235,7 @@ gulp.task('clean:release', function () {
 	return del(['./release']);
 });
 
-/** 开启浏览器同步插件，支持 html/css 变动重新加载 */
+/** 开启浏览器同步插件，支持 html/css/js 变动重新加载 */
 gulp.task('serve', ['compile'], function () {
 	browserSync.init({
 		server: {
@@ -131,15 +243,20 @@ gulp.task('serve', ['compile'], function () {
 			index: 'html/index.html'
 		}
 	});
-
-	watch(['./app/style/**/*.scss'], function () {
+	watch(resources.html.page.src, function () {
+		runSequence('html', reload);
+	});
+	watch(resources.style.common.src, function () {
 		gulp.start(['css:app']);
 	});
-	watch(['./app/style/**/*.js'], function () {
+	watch(resources.style.page.src, function () {
+		gulp.start(['css:app']);
+	});
+	watch(resources.script.common.src, function () {
 		gulp.start(['js:app']);
 	});
-	watch(['./app/html/**/*.hb'], function () {
-		runSequence('html', reload);
+	watch(resources.script.page.src, function () {
+		gulp.start(['js:app']);
 	});
 });
 
