@@ -44,8 +44,8 @@ var configuration = parseArgs(process.argv.slice(2), {
 var resources = {
 	html: { //网页
 		page: { //页面配置
-			batch: ['./app/html/part'], //handlebars 组件位置
-			src: ['./app/html/**/*.hb'], //handlebars 文件位置
+			batch: ['./app/html/_part'], //handlebars 组件位置
+			src: ['./app/html/**/*.hb', '!./app/html/_part/**/*.hb'], //handlebars 文件位置
 			dest: './html' //目标位置
 		}
 	},
