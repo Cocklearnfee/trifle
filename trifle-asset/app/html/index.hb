@@ -9,7 +9,8 @@
 	<li>
 		<a href="/html/dashboard_1.html">Dashboard v.1</a>
 		<a href="/html/dashboard_2.html">Dashboard v.2</a>
-		<a href="/html/a.html">Dashboard v.a</a>
+		<a href="/html/a.html">Dashboard v.c</a>
+		<a href="/html/c.html">Dashboard v.c</a>
 	</li>
 </ul>
 {{> page-footer}}

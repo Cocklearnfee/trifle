@@ -51,7 +51,7 @@ var resources = {
 	},
 	style: { //样式
 		common: { //页面内通用样式
-			src: ['./app/style/**/*.scss'], //源文件
+			src: ['./app/style/common/**/*.scss'], //源文件
 			dest: './dist/style', //目标位置
 			concat: 'app.min.css' //合并后文件名
 		},
@@ -72,12 +72,12 @@ var resources = {
 	},
 	script: { //脚本
 		common: { //项目内脚本
-			src: ['./app/script/**/*.ts'],
-			dest: './dist/script'
+			src: ['./app/script/common/**/*.ts'],
+			dest: './dist/script/common'
 		},
 		page: { //每个页面对应的脚本
-			src: [''],
-			dest: './dist/script/'
+			src: ['./app/script/page/**/*.ts'],
+			dest: './dist/script/page'
 		},
 		libs: { //通用脚本库
 			src: ['', '', ''],
@@ -286,10 +286,9 @@ gulp.task('archive', function () {
 	runSequence('clean:generate', 'compile', 'package');
 });
 
-/** 默认任务 */
-gulp.task('default', ['help']);
-
 gulp.task('debug', ['help'], function () {
 });
 
+/** 默认任务 */
+gulp.task('default', ['help']);
 //endregion
