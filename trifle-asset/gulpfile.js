@@ -6,6 +6,7 @@ var sass = require('gulp-sass'); 							//sass 编译模块
 var concat = require('gulp-concat');           				//合并
 var jshint = require('gulp-jshint');           				//js规范验证
 var uglify = require('gulp-uglify');           				//压缩
+var imageMin = require('gulp-imagemin');					//图片压缩
 var rename = require('gulp-rename');          				//文件名命名
 var watch = require('gulp-watch');							//监听,gulp 默认的不能监听文件增加和删除
 var handlebars = require('gulp-compile-handlebars');		//handlebars 模板
