@@ -5,6 +5,6 @@
 //加载通用混合
 @import "mixins";
 //重载其他插件库样式
-@import "overrides/bootstrap";
+@import "overrides/_bootstrap";
 //加载组件样式
-@import "components/layout";
+@import "components/_layout";

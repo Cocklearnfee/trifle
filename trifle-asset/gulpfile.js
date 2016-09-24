@@ -51,13 +51,17 @@ var resources = {
 	},
 	style: { //样式
 		common: { //页面内通用样式
-			src: ['./app/style/common/**/*.scss'], //源文件
+			src: ['./app/style/common/trifle.scss'], //源文件
 			dest: './dist/style', //目标位置
-			concat: 'app.min.css' //合并后文件名
+			include: ['./app/style/common/**/*.scss'],
+			concat: 'app.min.css', //合并后文件名
+			watch: ['./app/style/common/**/*.scss'] //监听文件
 		},
 		page: { //每个页面对应的样式
 			src: ['./app/style/page/**/*.scss'],
-			dest: './dist/style/page'
+			dest: './dist/style/page',
+			include: ['./app/style/common/**/*.scss', './app/style/page/**/*.scss'],
+			watch: ['./app/style/page/**/*.scss']
 		},
 		libs: { //通用样式库
 			src: ['./app/style/test/**/*.scss'],
@@ -92,7 +96,6 @@ var resources = {
 	}
 };
 
-//TODO: 项目内区分通用和页面独立使用，通用压缩合并到一个文件中，独立的分别打包，每个页面个
 //region 资源文件编译压缩
 
 //region html 编译
@@ -118,7 +121,7 @@ gulp.task('html', function () {
 gulp.task('css:app', function () {
 	var commonCss = gulp.src(resources.style.common.src)
 			.pipe(gulpIf(!configuration.release, sourceMaps.init({loadMaps: true})))
-			.pipe(sass())
+			.pipe(sass({includePaths: resources.style.common.include}))
 			.pipe(cleanCss())
 			.pipe(concat(resources.style.common.concat))
 			.pipe(gulpIf(!configuration.release, sourceMaps.write()))
@@ -226,7 +229,7 @@ gulp.task('img:sprite', function () {
 gulp.task('compile', ['img:common', 'img:sprite', 'css:lib', 'css:app', 'js:lib', 'js:app', 'html']);
 
 /** 清理项目 */
-gulp.task('clean:generate', function () {
+gulp.task('clean:app', function () {
 	return del(['./dist', './html', './tmp']);
 });
 
@@ -246,10 +249,10 @@ gulp.task('serve', ['compile'], function () {
 	watch(resources.html.page.src, function () {
 		runSequence('html', reload);
 	});
-	watch(resources.style.common.src, function () {
+	watch(resources.style.common.watch, function () {
 		gulp.start(['css:app']);
 	});
-	watch(resources.style.page.src, function () {
+	watch(resources.style.page.watch, function () {
 		gulp.start(['css:app']);
 	});
 	watch(resources.script.common.src, function () {
@@ -283,7 +286,7 @@ gulp.task('package', function () {
 
 /**现有文件打包到发布文件夹中*/
 gulp.task('archive', function () {
-	runSequence('clean:generate', 'compile', 'package');
+	runSequence('clean:app', 'compile', 'package');
 });
 
 gulp.task('debug', ['help'], function () {
