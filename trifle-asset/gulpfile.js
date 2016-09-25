@@ -6,6 +6,7 @@ var sass = require('gulp-sass'); 							//sass 编译模块
 var concat = require('gulp-concat');           				//合并
 var jshint = require('gulp-jshint');           				//js规范验证
 var uglify = require('gulp-uglify');           				//压缩
+var gulpUtil = require('gulp-util');						//gulp工具类
 var imageMin = require('gulp-imagemin');					//图片压缩
 var rename = require('gulp-rename');          				//文件名命名
 var watch = require('gulp-watch');							//监听,gulp 默认的不能监听文件增加和删除
@@ -36,7 +37,7 @@ var configuration = parseArgs(process.argv.slice(2), {
 		name: 'trifle-asset'		//文件名
 		, release: false 			//是否是发布版本
 		, version: '1.0.0' 			//当前版本号
-		, dest: './release' 		//发布基路径
+		, dist: './release' 		//发布基路径
 		, zip: true					//是否启用压缩
 	}
 });
@@ -47,52 +48,59 @@ var resources = {
 		page: { //页面配置
 			batch: ['./app/html/_part'], //handlebars 组件位置
 			src: ['./app/html/**/*.hb', '!./app/html/_part/**/*.hb'], //handlebars 文件位置
-			dest: './html' //目标位置
+			dist: './html', //目标位置
+			watch: ['./app/html/**/*.hb']
 		}
 	},
 	style: { //样式
 		common: { //页面内通用样式
 			src: ['./app/style/common/trifle.scss'], //源文件
-			dest: './dist/style', //目标位置
+			dist: './dist/style', //目标位置
 			include: ['./app/style/common/**/*.scss'],
 			concat: 'app.min.css', //合并后文件名
 			watch: ['./app/style/common/**/*.scss'] //监听文件
 		},
 		page: { //每个页面对应的样式
 			src: ['./app/style/page/**/*.scss'],
-			dest: './dist/style/page',
+			dist: './dist/style/page',
 			include: ['./app/style/common/**/*.scss', './app/style/page/**/*.scss'],
 			watch: ['./app/style/page/**/*.scss']
 		},
 		libs: { //通用样式库
 			src: ['./app/style/test/**/*.scss'],
-			dest: './dist/style',
+			dist: './dist/style',
 			concat: 'libs.min.css'
 		},
 		bootstrap: { //bootstrap 库配置信息
 			src: ['./vendor/bootstrap/dist/css/bootstrap.css'],
-			dest: './dist/style',
+			dist: './dist/style',
 			concat: 'bootstrap.min.css'
 		}
 	},
 	script: { //脚本
 		common: { //项目内脚本
 			src: ['./app/script/common/**/*.ts'],
-			dest: './dist/script/common'
+			dist: './dist/script/common'
 		},
 		page: { //每个页面对应的脚本
 			src: ['./app/script/page/**/*.ts'],
-			dest: './dist/script/page'
+			dist: './dist/script/page'
 		},
 		libs: { //通用脚本库
 			src: ['', '', ''],
-			dest: './dist/script',
+			dist: './dist/script',
 			concat: 'lib.min.js'
 		},
 		jquery: { //jquery 库配置信息
 			src: [''],
-			dest: './dist/script',
+			dist: './dist/script',
 			concat: 'jquery.min.js'
+		}
+	},
+	image: {
+		common: {
+			src: ['./app/image/**/*.{png,jpg,gif,ico}'],
+			dist: './dist/image'
 		}
 	}
 };
@@ -111,7 +119,7 @@ gulp.task('html', function () {
 	return gulp.src(resources.html.page.src)
 			.pipe(handlebars(handlebars_data, options))
 			.pipe(rename({extname: '.html'}))
-			.pipe(gulp.dest(resources.html.page.dest));
+			.pipe(gulp.dest(resources.html.page.dist));
 });
 
 //endregion
@@ -123,18 +131,20 @@ gulp.task('css:app', function () {
 	var commonCss = gulp.src(resources.style.common.src)
 			.pipe(gulpIf(!configuration.release, sourceMaps.init({loadMaps: true})))
 			.pipe(sass({includePaths: resources.style.common.include}))
+			.on('error', gulpUtil.log)
 			.pipe(cleanCss())
 			.pipe(concat(resources.style.common.concat))
 			.pipe(gulpIf(!configuration.release, sourceMaps.write()))
-			.pipe(gulp.dest(resources.style.common.dest))
+			.pipe(gulp.dest(resources.style.common.dist))
 			.pipe(reload({stream: true}));
 
 	var pageCss = gulp.src(resources.style.page.src)
 			.pipe(gulpIf(!configuration.release, sourceMaps.init({loadMaps: true})))
 			.pipe(sass())
+			.on('error', gulpUtil.log)
 			.pipe(cleanCss())
 			.pipe(gulpIf(!configuration.release, sourceMaps.write()))
-			.pipe(gulp.dest(resources.style.page.dest))
+			.pipe(gulp.dest(resources.style.page.dist))
 			.pipe(reload({stream: true}));
 
 	return mergeStream(commonCss, pageCss);
@@ -147,7 +157,7 @@ gulp.task('css:lib', function () {
 			.pipe(cleanCss())
 			.pipe(concat(resources.style.libs.concat))
 			.pipe(gulpIf(!configuration.release, sourceMaps.write()))
-			.pipe(gulp.dest(resources.style.libs.dest))
+			.pipe(gulp.dest(resources.style.libs.dist))
 			.pipe(reload({stream: true}));
 
 	var bootstrapCss = gulp.src(resources.style.bootstrap.src)
@@ -155,7 +165,7 @@ gulp.task('css:lib', function () {
 			.pipe(cleanCss())
 			.pipe(concat(resources.style.bootstrap.concat))
 			.pipe(gulpIf(!configuration.release, sourceMaps.write()))
-			.pipe(gulp.dest(resources.style.bootstrap.dest))
+			.pipe(gulp.dest(resources.style.bootstrap.dist))
 			.pipe(reload({stream: true}));
 
 	return mergeStream(libsCss, bootstrapCss)
@@ -185,10 +195,11 @@ gulp.task('js:app', function () {
 	return mergeStream(gulp.src(resources.script.common.src), gulp.src(resources.script.page.src))
 			.pipe(gulpIf(!configuration.release, sourceMaps.init({loadMaps: true})))
 			.pipe(typescript({target: 'ES5', module: 'umd'}))
+			.on('error', gulpUtil.log)
 			.pipe(jshint())
 			.pipe(uglify())
 			.pipe(gulpIf(!configuration.release, sourceMaps.write()))
-			.pipe(gulp.dest(resources.script.common.dest))
+			.pipe(gulp.dest(resources.script.common.dist))
 			.pipe(reload({stream: true}));
 });
 
@@ -197,13 +208,13 @@ gulp.task('js:lib', function () {
 	var libStream = gulp.src(resources.script.libs.src)
 			.pipe(uglify())
 			.pipe(concat(resources.script.libs.concat))
-			.pipe(gulp.dest(resources.script.libs.dest))
+			.pipe(gulp.dest(resources.script.libs.dist))
 			.pipe(reload({stream: true}));
 
 	var jqueryStream = gulp.src(resources.script.jquery.src)
 			.pipe(uglify())
 			.pipe(concat(resources.script.jquery.concat))
-			.pipe(gulp.dest(resources.script.jquery.dest))
+			.pipe(gulp.dest(resources.script.jquery.dist))
 			.pipe(reload({stream: true}));
 
 	return mergeStream(libStream, jqueryStream);
@@ -215,6 +226,15 @@ gulp.task('js:lib', function () {
 
 /** 图片资源文件 */
 gulp.task('img:common', function () {
+	gulp.src(resources.image.common.src)
+			.pipe(imageMin({
+				optimizationLevel: 5, //类型：Number  默认：3  取值范围：0-7（优化等级）
+				progressive: true, //类型：Boolean 默认：false 无损压缩jpg图片
+				interlaced: true, //类型：Boolean 默认：false 隔行扫描gif进行渲染
+				multipass: true //类型：Boolean 默认：false 多次优化svg直到完全优化
+			}))
+			.on('error', gulpUtil.log)
+			.pipe(gulp.dest(resources.image.common.dist));
 });
 
 gulp.task('img:sprite', function () {
@@ -243,11 +263,15 @@ gulp.task('clean:release', function () {
 gulp.task('serve', ['compile'], function () {
 	browserSync.init({
 		server: {
-			baseDir: './',
-			index: 'html/index.html'
-		}
+			baseDir: './', //基础目录
+			directory: true, //directory listing
+			index: 'html/index.html' //index file name
+		},
+		online: false, //离线应用
+		open: false, //关闭自动打开页面，避免浏览器打开太多页面。
+		reloadOnRestart: true //Browser sync 重启时重新加载页面
 	});
-	watch(resources.html.page.src, function () {
+	watch(resources.html.page.watch, function () {
 		runSequence('html', reload);
 	});
 	watch(resources.style.common.watch, function () {
@@ -282,7 +306,7 @@ gulp.task('package', function () {
 	var archive = configuration.name + '-' + configuration.version + (configuration.release ? '-release' : '') + '.zip';
 	return gulp.src(['./dist/**/', './html/**/*'], {base: './'})
 			.pipe(gulpIf(configuration.zip, zip(archive)))
-			.pipe(gulp.dest(configuration.dest));
+			.pipe(gulp.dest(configuration.dist));
 });
 
 /**现有文件打包到发布文件夹中*/

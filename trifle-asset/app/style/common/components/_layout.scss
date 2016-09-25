@@ -1,11 +1,27 @@
-ul {
-	list-style: none;
-	li {
-		float:left;
-		color: red;
-
-		a{
-			color: red;
-		}
-	}
+.navbar {
+	@include box-shadow($default-shadow);
 }
+
+.navbar-left {
+	position: fixed;
+	width: $navbar-left-width;
+	height: 100%;
+	top: $navbar-top-height;
+	left: 0;
+}
+
+.navbar-right {
+	position: fixed;
+	width: $navbar-right-width;
+	height: 100%;
+	top: $navbar-top-height;
+	right: 0;
+}
+
+.page-wrapper {
+	margin-top: $navbar-top-height;
+	margin-left: $navbar-left-width;
+	@include transition(all 0.4s);
+}
+
+

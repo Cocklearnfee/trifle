@@ -20,5 +20,5 @@ class Employee {
 var employee = new Employee();
 employee.fullName = "Bob Smith";
 if (employee.fullName) {
-    alert(employee.fullName);
+    // alert(employee.fullName);
 }

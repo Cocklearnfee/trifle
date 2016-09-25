@@ -26,6 +26,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-typescript": "^2.14.1",
     "gulp-uglify": "^2.0.0",
+    "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.9",
     "gulp-zip": "^3.2.0",
     "jshint": "^2.9.3",

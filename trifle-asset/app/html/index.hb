@@ -4,16 +4,32 @@
 	{{> body-header}}
 </head>
 <body>
-{{> page-header}}
-<ul>
-	<li>
-		<a href="/html/dashboard_1.html">Dashboard v.1</a>
-		<a href="/html/dashboard_2.html">Dashboard v.2</a>
-		<a href="/html/a.html">Dashboard v.c</a>
-		<a href="/html/c.html">Dashboard v.c</a>
-	</li>
-</ul>
-{{> page-footer}}
+
+<!--页面包装-->
+<div>
+
+	<!--  -->
+	{{> navbar-left}}
+
+	<div>
+
+		<!--页面头-->
+		{{> navbar-top}}
+
+		<!--页面内容-->
+		<div class="page-wrapper">
+			page content
+		</div>
+
+		<!--页面尾-->
+		{{> navbar-bottom}}
+
+	</div>
+
+	<!--右侧导航-->
+	{{> navbar-right}}
+
+</div>
 {{> body-footer}}
 </body>
 </html>

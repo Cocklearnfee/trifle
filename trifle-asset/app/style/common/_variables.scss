@@ -1,1 +1,71 @@
-@import "../../../vendor/bootstrap/scss/variables";
+/**
+ * Table of content
+ *
+ * colors
+ * fonts
+ * options
+ *
+ * components
+ */
+//region 通用定义， colors fonts body
+
+//各种灰度颜色
+$color-darkest: #333 !default; //最黑，不宜用 #000，和白色的背景对比过大
+$color-darker: #676a6c !default; //default font color
+$color-dark: #888 !default; //sub header color
+$color-base: #e3e7e8 !default; //border color
+$color-light: #f3f3f4 !default; //background color
+$color-lighter: #f8f8f9 !default; //lighter background color
+$color-lightest: #fff !default; //lightest background color
+
+//brand colors
+$brand-default: #fff !default;
+$brand-primary: #1ab394 !default;
+$brand-success: #1c84c6 !default;
+$brand-info: #23c6c8 !default;
+$brand-warning: #f8ac59 !default;
+$brand-danger: #ed5565 !default;
+
+//灰色背景颜色，不宜细分过度
+$background-color-lightest: $color-lightest !default; //white background color
+$background-color-lighter: $color-lighter !default; //light gray background color
+$background-color-base: $color-light !default; //background for whole page
+$background-color-color: $brand-primary !default; //background color for theme
+
+//fonts and sizes
+$font-color-base: $color-darker !default; //default font color
+$font-color-light: $color-dark !default; //light font color
+$font-family-base: "Microsoft Yahei", "Roboto", Arial, sans-serif !default; //default font family
+$font-size-base: 13px !default; //default font size
+$line-height-base: 1.5 !default; //default line height
+
+//options
+$enable-radius: false !default; //enable border-radius or not
+$enable-shadows: true !default; //box shadow and text shadow
+$enable-transitions: true !default; //transitions
+
+$default-shadow:
+		0 2px 2px 0 rgba(0, 0, 0, 0.14),
+		0 3px 1px -2px rgba(0, 0, 0, 0.2),
+		0 1px 5px 0 rgba(0, 0, 0, 0.12) !default;
+
+//endregion
+
+//region components
+
+
+//page-header
+$navbar-top-height: 60px !default;
+
+//page-footer
+$navbar-bottom-height: 40px !default;
+
+//left-navbar
+$navbar-left-width: 220px !default;
+
+//right-navbar
+$navbar-right-width: 260px !default;
+
+//page-content
+
+//endregion

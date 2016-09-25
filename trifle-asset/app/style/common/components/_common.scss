@@ -1,0 +1,16 @@
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	margin: 0;
+}
+
+body {
+	font-family: $font-family-base;
+	font-size: $font-size-base;
+	color: $font-color-base;
+	line-height: $line-height-base;
+	background-color: $background-color-lightest;
+	overflow-x: hidden;
+}

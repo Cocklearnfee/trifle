@@ -1,9 +1,12 @@
 <component name="ProjectDictionaryState">
   <dictionary name="Stark">
     <words>
+      <w>extname</w>
       <w>kode</w>
       <w>minimist</w>
       <w>mixins</w>
+      <w>multipass</w>
+      <w>navbar</w>
       <w>scss</w>
       <w>sourcemaps</w>
       <w>uglify</w>
