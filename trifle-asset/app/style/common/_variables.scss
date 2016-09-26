@@ -60,18 +60,23 @@ $grid-breakpoints: (
 
 //region components
 
-//page-header
+//navbar-top
 $navbar-top-height: 60px !default;
+$navbar-top-zindex: 100 !default;
 
-//page-footer
+//navbar-bottom
 $navbar-bottom-height: 40px !default;
+$navbar-bottom-zindex: 80 !default;
 
-//left-navbar
+//navbar-left
 $navbar-left-width: 220px !default;
+$navbar-left-zindex: 60 !default;
 
-//right-navbar
+//navbar-right
 $navbar-right-width: 260px !default;
+$navbar-right-zindex: 50 !default;
 
 //page-content
+$page-content-padding: 20px !default;
 
 //endregion

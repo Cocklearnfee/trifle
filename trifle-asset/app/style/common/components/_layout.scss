@@ -6,6 +6,7 @@
 	width: 100%;
 	height: $navbar-top-height;
 	background-color: $background-color-color;
+	z-index: $navbar-top-zindex;
 
 	.navbar-top-fixed & {
 		position: fixed;
@@ -14,6 +15,7 @@
 
 .navbar-bottom {
 	height: $navbar-bottom-height;
+	z-index: $navbar-bottom-zindex;
 
 	.navbar-bottom-fixed & {
 		position: fixed;
@@ -23,8 +25,10 @@
 .navbar-left {
 	width: $navbar-left-width;
 	height: 100%;
+	background-color: $background-color-lightest;
 	top: $navbar-top-height;
 	left: 0;
+	z-index: $navbar-left-zindex;
 
 	.navbar-left-fixed & {
 		position: fixed;
@@ -34,8 +38,10 @@
 .navbar-right {
 	width: $navbar-right-width;
 	height: 100%;
+	background-color: $background-color-lightest;
 	top: $navbar-top-height;
 	right: 0;
+	z-index: $navbar-right-zindex;
 
 	.navbar-right-fixed & {
 		position: fixed;
@@ -45,6 +51,9 @@
 .page-wrapper {
 	margin-top: $navbar-top-height;
 	margin-left: $navbar-left-width;
+	padding: $page-content-padding;
+	padding-bottom: $navbar-bottom-height;
+
 	@include transition(all 0.4s);
 
 	@media (max-width: map_get($grid-breakpoints, "sm")) {
