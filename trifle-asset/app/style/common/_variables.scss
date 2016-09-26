@@ -40,19 +40,25 @@ $font-size-base: 13px !default; //default font size
 $line-height-base: 1.5 !default; //default line height
 
 //options
-$enable-radius: false !default; //enable border-radius or not
-$enable-shadows: true !default; //box shadow and text shadow
+$enable-rounded: true !default; //是否允许圆角，必须允许圆角才能取消 bootstrap 的默认圆角
+$enable-shadows: true !default; //是否允许阴影。
 $enable-transitions: true !default; //transitions
 
-$default-shadow:
-		0 2px 2px 0 rgba(0, 0, 0, 0.14),
-		0 3px 1px -2px rgba(0, 0, 0, 0.2),
-		0 1px 5px 0 rgba(0, 0, 0, 0.12) !default;
+$default-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+0 3px 1px -2px rgba(0, 0, 0, 0.2),
+0 1px 5px 0 rgba(0, 0, 0, 0.12) !default;
+
+$grid-breakpoints: (
+		xs: 0,
+		sm: 544px,
+		md: 768px,
+		lg: 992px,
+		xl: 1200px
+) !default;
 
 //endregion
 
 //region components
-
 
 //page-header
 $navbar-top-height: 60px !default;

@@ -1,6 +1,2 @@
-//import bootstrap mixin
-@import "../../../vendor/bootstrap/scss/mixins";
-//
 //加载各个组件的 mixin 到该文件中
-@import "mixins/transition";
-@import "mixins/box-shadow";
+@import "mixins/properties";

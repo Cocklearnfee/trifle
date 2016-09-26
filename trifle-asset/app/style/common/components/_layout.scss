@@ -2,26 +2,54 @@
 	@include box-shadow($default-shadow);
 }
 
+.navbar-top {
+	width: 100%;
+	height: $navbar-top-height;
+	background-color: $background-color-color;
+
+	.navbar-top-fixed & {
+		position: fixed;
+	}
+}
+
+.navbar-bottom {
+	height: $navbar-bottom-height;
+
+	.navbar-bottom-fixed & {
+		position: fixed;
+	}
+}
+
 .navbar-left {
-	position: fixed;
 	width: $navbar-left-width;
 	height: 100%;
 	top: $navbar-top-height;
 	left: 0;
+
+	.navbar-left-fixed & {
+		position: fixed;
+	}
 }
 
 .navbar-right {
-	position: fixed;
 	width: $navbar-right-width;
 	height: 100%;
 	top: $navbar-top-height;
 	right: 0;
+
+	.navbar-right-fixed & {
+		position: fixed;
+	}
 }
 
 .page-wrapper {
 	margin-top: $navbar-top-height;
 	margin-left: $navbar-left-width;
 	@include transition(all 0.4s);
+
+	@media (max-width: map_get($grid-breakpoints, "sm")) {
+		margin-left: 0;
+	}
 }
 
 

@@ -6,7 +6,7 @@
 <body>
 
 <!--页面包装-->
-<div>
+<div class="wrapper navbar-left-fixed navbar-right-fixed">
 
 	<!--  -->
 	{{> navbar-left}}

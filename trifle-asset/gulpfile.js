@@ -35,7 +35,7 @@ var configuration = parseArgs(process.argv.slice(2), {
 	alias: {n: 'name', r: 'release', v: 'version', d: 'dest', z: 'zip'}, //配置变量取别名
 	default: {
 		name: 'trifle-asset'		//文件名
-		, release: false 			//是否是发布版本
+		, release: false 			//是否是发布版本，发行版本需要压缩 css 和 js，省略源图
 		, version: '1.0.0' 			//当前版本号
 		, dist: './release' 		//发布基路径
 		, zip: true					//是否启用压缩
@@ -67,7 +67,7 @@ var resources = {
 			watch: ['./app/style/page/**/*.scss']
 		},
 		libs: { //通用样式库
-			src: ['./app/style/test/**/*.scss'],
+			src: ['./vendor/font-awesome/css/font-awesome.min.css'],
 			dist: './dist/style',
 			concat: 'libs.min.css'
 		},
@@ -80,7 +80,7 @@ var resources = {
 	script: { //脚本
 		common: { //项目内脚本
 			src: ['./app/script/common/**/*.ts'],
-			dist: './dist/script/common'
+			dist: './dist/script/common',
 		},
 		page: { //每个页面对应的脚本
 			src: ['./app/script/page/**/*.ts'],
@@ -95,6 +95,12 @@ var resources = {
 			src: [''],
 			dist: './dist/script',
 			concat: 'jquery.min.js'
+		}
+	},
+	font: {
+		fontAwesome: {
+			src: ['./vendor/font-awesome/fonts/*'],
+			dist: './dist/fonts'
 		}
 	},
 	image: {
@@ -132,7 +138,7 @@ gulp.task('css:app', function () {
 			.pipe(gulpIf(!configuration.release, sourceMaps.init({loadMaps: true})))
 			.pipe(sass({includePaths: resources.style.common.include}))
 			.on('error', gulpUtil.log)
-			.pipe(cleanCss())
+			.pipe(gulpIf(configuration.release, cleanCss()))
 			.pipe(concat(resources.style.common.concat))
 			.pipe(gulpIf(!configuration.release, sourceMaps.write()))
 			.pipe(gulp.dest(resources.style.common.dist))
@@ -142,7 +148,7 @@ gulp.task('css:app', function () {
 			.pipe(gulpIf(!configuration.release, sourceMaps.init({loadMaps: true})))
 			.pipe(sass())
 			.on('error', gulpUtil.log)
-			.pipe(cleanCss())
+			.pipe(gulpIf(configuration.release, cleanCss()))
 			.pipe(gulpIf(!configuration.release, sourceMaps.write()))
 			.pipe(gulp.dest(resources.style.page.dist))
 			.pipe(reload({stream: true}));
@@ -154,7 +160,7 @@ gulp.task('css:app', function () {
 gulp.task('css:lib', function () {
 	var libsCss = gulp.src(resources.style.libs.src)
 			.pipe(gulpIf(!configuration.release, sourceMaps.init({loadMaps: true})))
-			.pipe(cleanCss())
+			.pipe(gulpIf(configuration.release, cleanCss()))
 			.pipe(concat(resources.style.libs.concat))
 			.pipe(gulpIf(!configuration.release, sourceMaps.write()))
 			.pipe(gulp.dest(resources.style.libs.dist))
@@ -162,7 +168,7 @@ gulp.task('css:lib', function () {
 
 	var bootstrapCss = gulp.src(resources.style.bootstrap.src)
 			.pipe(gulpIf(!configuration.release, sourceMaps.init({loadMaps: true})))
-			.pipe(cleanCss())
+			.pipe(gulpIf(configuration.release, cleanCss()))
 			.pipe(concat(resources.style.bootstrap.concat))
 			.pipe(gulpIf(!configuration.release, sourceMaps.write()))
 			.pipe(gulp.dest(resources.style.bootstrap.dist))
@@ -177,27 +183,12 @@ gulp.task('css:lib', function () {
 
 /** js 压缩同步，区分项目内通用文件和每个页面对应的文件。 */
 gulp.task('js:app', function () {
-	/*	var commonJs = gulp.src(resources.script.common.src)
-	 .pipe(typescript({}))
-	 .pipe(jshint())
-	 .pipe(uglify())
-	 .pipe(gulp.dest(resources.script.common.dest))
-	 .pipe(reload({stream: true}));
-
-	 var pageJs = gulp.src(resources.script.page.src)
-	 .pipe(jshint())
-	 .pipe(uglify())
-	 .pipe(gulp.dest(resources.script.page.dest))
-	 .pipe(reload({stream: true}));
-
-	 return mergeStream(commonJs, pageJs);*/
-
 	return mergeStream(gulp.src(resources.script.common.src), gulp.src(resources.script.page.src))
 			.pipe(gulpIf(!configuration.release, sourceMaps.init({loadMaps: true})))
 			.pipe(typescript({target: 'ES5', module: 'umd'}))
 			.on('error', gulpUtil.log)
 			.pipe(jshint())
-			.pipe(uglify())
+			.pipe(gulpIf(configuration.release, uglify()))
 			.pipe(gulpIf(!configuration.release, sourceMaps.write()))
 			.pipe(gulp.dest(resources.script.common.dist))
 			.pipe(reload({stream: true}));
@@ -206,13 +197,13 @@ gulp.task('js:app', function () {
 /** js lib 压缩同步，支持不同类型的库进行打包 */
 gulp.task('js:lib', function () {
 	var libStream = gulp.src(resources.script.libs.src)
-			.pipe(uglify())
+			.pipe(gulpIf(configuration.release, uglify()))
 			.pipe(concat(resources.script.libs.concat))
 			.pipe(gulp.dest(resources.script.libs.dist))
 			.pipe(reload({stream: true}));
 
 	var jqueryStream = gulp.src(resources.script.jquery.src)
-			.pipe(uglify())
+			.pipe(gulpIf(configuration.release, uglify()))
 			.pipe(concat(resources.script.jquery.concat))
 			.pipe(gulp.dest(resources.script.jquery.dist))
 			.pipe(reload({stream: true}));
@@ -222,7 +213,12 @@ gulp.task('js:lib', function () {
 
 //endregion
 
-//region img 压缩
+//region 其他资源
+
+gulp.task('font', function () {
+	return gulp.task(resources.font.fontAwesome.src)
+			.pipe(gulp.dest(resources.font.fontAwesome.dist));
+});
 
 /** 图片资源文件 */
 gulp.task('img:common', function () {
@@ -247,7 +243,8 @@ gulp.task('img:sprite', function () {
 //region 发布清理调试
 
 /** 编译资源文件 */
-gulp.task('compile', ['img:common', 'img:sprite', 'css:lib', 'css:app', 'js:lib', 'js:app', 'html']);
+gulp.task('compile:app', ['css:lib', 'css:app', 'js:lib', 'js:app', 'html']);
+gulp.task('compile:img', ['img:common', 'img:sprite']);
 
 /** 清理项目 */
 gulp.task('clean:app', function () {
@@ -260,7 +257,7 @@ gulp.task('clean:release', function () {
 });
 
 /** 开启浏览器同步插件，支持 html/css/js 变动重新加载 */
-gulp.task('serve', ['compile'], function () {
+gulp.task('serve', ['compile:app'], function () {
 	browserSync.init({
 		server: {
 			baseDir: './', //基础目录
