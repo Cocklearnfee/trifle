@@ -124,6 +124,7 @@ gulp.task('html', function () {
 
 	return gulp.src(resources.html.page.src)
 			.pipe(handlebars(handlebars_data, options))
+			.on('error', gulpUtil.log)
 			.pipe(rename({extname: '.html'}))
 			.pipe(gulp.dest(resources.html.page.dist));
 });

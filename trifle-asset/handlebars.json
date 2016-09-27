@@ -1,6 +1,24 @@
 {
 	"title": "Trifle",
 	"version": "1.0.0",
+	"menus": [
+		{
+			"title": "Dashboard",
+			"icon": "fa fa-diamond",
+			"href": "/html/index.html",
+			"menus": [
+				{
+					"title": "Dashboard v.1.0",
+					"href": "/html/index.html"
+				}
+			]
+		},
+		{
+			"title": "Layout",
+			"icon": "fa fa-th-large",
+			"href": "/html/layout.html"
+		}
+	],
 	"index": {
 	}
 }

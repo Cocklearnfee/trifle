@@ -1,5 +1,6 @@
 # IDEA project files
 #.idea
+.idea/workspace.xml
 out
 build
 target

@@ -1,2 +1,7 @@
 <!--左侧导航-->
-<div class="navbar navbar-left">left sidebar 2</div>
+<div class="navbar navbar-left">
+	<ul>
+		<li class="navbar-header"></li>
+		<li></li>
+	</ul>
+</div>
