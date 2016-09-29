@@ -13,3 +13,13 @@
 		}
 	}
 }
+
+.card {
+	@include border-radius(0);
+	@include box-shadow($default-shadow);
+
+	.list-group-item {
+		border-left: 0;
+		border-right: 0;
+	}
+}

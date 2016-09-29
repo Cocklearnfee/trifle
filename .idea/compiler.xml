@@ -18,7 +18,7 @@
         <processorPath useClasspath="true" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="1.8">
+    <bytecodeTargetLevel>
       <module name="trifle-asset_main" target="1.8" />
       <module name="trifle-asset_test" target="1.8" />
       <module name="trifle-manage-web_main" target="1.8" />

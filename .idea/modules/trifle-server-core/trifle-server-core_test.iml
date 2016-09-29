@@ -9,6 +9,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="trifle-server-core_main" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -27,7 +28,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module" module-name="trifle-server-core_main" />
     <orderEntry type="library" name="Gradle: org.slf4j:slf4j-api:1.7.21" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-core:4.3.2.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-beans:4.3.2.RELEASE" level="project" />
@@ -54,8 +54,8 @@
     <orderEntry type="library" name="Gradle: org.springframework:spring-expression:4.3.2.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.boot:spring-boot-starter:1.4.0.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework.security:spring-security-config:4.1.1.RELEASE" level="project" />
-    <orderEntry type="library" name="Gradle: org.springframework.security:spring-security-web:4.1.1.RELEASE" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: javax.servlet:jstl:1.2" level="project" />
+    <orderEntry type="library" name="Gradle: org.springframework.security:spring-security-web:4.1.1.RELEASE" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-tx:4.3.2.RELEASE" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.apereo.cas:cas-server-security-filter:2.0.6" level="project" />
     <orderEntry type="library" name="Gradle: javax.validation:validation-api:1.1.0.Final" level="project" />

@@ -55,7 +55,6 @@
 	position: relative !important;
 	margin-top: $navbar-top-height;
 	margin-left: $navbar-left-width;
-	padding: 0 15px;
 	padding-bottom: $navbar-bottom-height;
 
 	@include transition(all 0.4s);
@@ -63,13 +62,10 @@
 	@media (max-width: map_get($grid-breakpoints, "sm")) {
 		margin-left: 0;
 	}
-
-
 }
 
-
 .page-header {
-	padding: 0 10px 20px 10px;
+	padding: 0 $page-content-padding 20px $page-content-padding;
 	background-color: $background-color-lightest;
 
 	.page-header-title {
@@ -79,5 +75,5 @@
 }
 
 .page-content {
-
+	padding: $page-content-padding;
 }

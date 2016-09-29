@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="file://$PROJECT_DIR$/trifle-asset" libraries="{Node.js Core}" />
-    <file url="PROJECT" libraries="{Node.js Global}" />
-    <includedPredefinedLibrary name="Node.js Core" />
-    <includedPredefinedLibrary name="trifle/trifle-asset/node_modules" />
+    <file url="file://$PROJECT_DIR$/trifle-asset" libraries="{trifle/trifle-asset/node_modules}" />
   </component>
 </project>
