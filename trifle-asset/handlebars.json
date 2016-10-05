@@ -1,7 +1,80 @@
 {
 	"title": "Trifle",
 	"version": "1.0.0",
+	"principal": {
+		"realName": "Ko Stark",
+		"portrait": "/dist/image/java.png",
+		"roles": [
+			"Administrator",
+			"Art director"
+		]
+	},
 	"menus": [
+		{
+			"title": "Dashboard",
+			"icon": "fa fa-diamond",
+			"href": "/html/index.html",
+			"menus": [
+				{
+					"title": "Dashboard-v.1.0",
+					"href": "/html/index.html"
+				},
+				{
+					"title": "Dashboard-v.2.0",
+					"href": "/html/index.html"
+				},{
+					"title": "Dashboard-v.3.0",
+					"href": "/html/index.html"
+				},
+				{
+					"title": "Dashboard-v.4.0",
+					"href": "/html/index.html"
+				}
+			]
+		},
+		{
+			"title": "Layout",
+			"icon": "fa fa-th-large",
+			"href": "/html/layout.html"
+		},
+		{
+			"title": "Dashboard",
+			"icon": "fa fa-diamond",
+			"href": "/html/index.html",
+			"menus": [
+				{
+					"title": "Dashboard v.1.0",
+					"href": "/html/index.html"
+				}
+			]
+		},
+		{
+			"title": "Dashboard",
+			"icon": "fa fa-diamond",
+			"href": "/html/index.html",
+			"menus": [
+				{
+					"title": "Dashboard v.1.0",
+					"href": "/html/index.html"
+				}
+			]
+		},
+		{
+			"title": "Dashboard",
+			"icon": "fa fa-diamond",
+			"href": "/html/index.html",
+			"menus": [
+				{
+					"title": "Dashboard v.1.0",
+					"href": "/html/index.html"
+				}
+			]
+		},
+		{
+			"title": "Layout",
+			"icon": "fa fa-th-large",
+			"href": "/html/layout.html"
+		},
 		{
 			"title": "Dashboard",
 			"icon": "fa fa-diamond",

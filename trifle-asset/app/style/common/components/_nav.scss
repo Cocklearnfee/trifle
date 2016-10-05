@@ -1,0 +1,36 @@
+.nav-item {
+	> a i {
+		margin-right: 6px;
+	}
+
+	> .nav-link {
+		&:hover,
+		&:focus,
+		&:active {
+			background: rgba(0, 0, 0, 0.12);
+		}
+	}
+}
+
+.nav-pills .nav-link {
+	@include border-radius(0);
+}
+
+.sidebar-left .nav-link {
+	color: $font-color-base;
+	padding: 12px 20px 12px 25px;
+
+	&:hover {
+		font-weight: 700;
+	}
+}
+
+.nav-second-level {
+	.nav-link {
+		padding: 7px 10px 7px 50px;
+
+		&:hover {
+			font-weight: 700;
+		}
+	}
+}

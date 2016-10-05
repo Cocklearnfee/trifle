@@ -22,8 +22,6 @@ var parseArgs = require('minimist');						//解析命令行参数
 
 var browserSync = require('browser-sync').create();			//browser sync
 var reload = browserSync.reload;							//browser reload
-var amdOptimize = require('gulp-amd-optimizer'); 			//amd 优化
-var concatSourceMap = require('gulp-concat-sourcemap'); 	//源图合并
 
 //数据导入
 var handlebars_data = require('./handlebars.json');			//handlebars 模板数据
@@ -67,34 +65,38 @@ var resources = {
 			watch: ['./app/style/page/**/*.scss']
 		},
 		libs: { //通用样式库
-			src: ['./vendor/font-awesome/css/font-awesome.min.css'],
+			src: [
+				'./vendor/font-awesome/css/font-awesome.min.css',
+				'./vendor/metisMenu/dist/metisMenu.min.css',
+				'./vendor/animate.css/animate.min.css'
+			],
 			dist: './dist/style',
 			concat: 'libs.min.css'
 		},
 		bootstrap: { //bootstrap 库配置信息
-			src: ['./vendor/bootstrap/dist/css/bootstrap.css'],
+			src: ['./vendor/bootstrap/dist/css/bootstrap.min.css'],
 			dist: './dist/style',
 			concat: 'bootstrap.min.css'
 		}
 	},
 	script: { //脚本
 		common: { //项目内脚本
-			src: ['./app/script/common/**/*.ts'],
-			dist: './dist/script/common',
+			src: ['./app/script/common/**/*.js'],
+			dist: './dist/script/common'
 		},
 		page: { //每个页面对应的脚本
-			src: ['./app/script/page/**/*.ts'],
+			src: ['./app/script/page/**/*.js'],
 			dist: './dist/script/page'
 		},
 		libs: { //通用脚本库
-			src: ['', '', ''],
+			src: [
+				'./vendor/jquery/dist/jquery.min.js',
+				'./vendor/tether/dist/js/tether.min.js',
+				'./vendor/bootstrap/dist/js/bootstrap.min.js',
+				'./vendor/metisMenu/dist/metisMenu.min.js'
+			],
 			dist: './dist/script',
-			concat: 'lib.min.js'
-		},
-		jquery: { //jquery 库配置信息
-			src: [''],
-			dist: './dist/script',
-			concat: 'jquery.min.js'
+			concat: 'libs.min.js'
 		}
 	},
 	font: {
@@ -184,32 +186,34 @@ gulp.task('css:lib', function () {
 
 /** js 压缩同步，区分项目内通用文件和每个页面对应的文件。 */
 gulp.task('js:app', function () {
-	return mergeStream(gulp.src(resources.script.common.src), gulp.src(resources.script.page.src))
+	var commonStream = gulp.src(resources.script.common.src)
 			.pipe(gulpIf(!configuration.release, sourceMaps.init({loadMaps: true})))
-			.pipe(typescript({target: 'ES5', module: 'umd'}))
 			.on('error', gulpUtil.log)
 			.pipe(jshint())
 			.pipe(gulpIf(configuration.release, uglify()))
 			.pipe(gulpIf(!configuration.release, sourceMaps.write()))
 			.pipe(gulp.dest(resources.script.common.dist))
 			.pipe(reload({stream: true}));
+
+	var pageStream = gulp.src(resources.script.page.src)
+			.pipe(gulpIf(!configuration.release, sourceMaps.init({loadMaps: true})))
+			.on('error', gulpUtil.log)
+			.pipe(jshint())
+			.pipe(gulpIf(configuration.release, uglify()))
+			.pipe(gulpIf(!configuration.release, sourceMaps.write()))
+			.pipe(gulp.dest(resources.script.page.dist))
+			.pipe(reload({stream: true}));
+
+	return mergeStream(commonStream, pageStream);
 });
 
 /** js lib 压缩同步，支持不同类型的库进行打包 */
 gulp.task('js:lib', function () {
-	var libStream = gulp.src(resources.script.libs.src)
+	return gulp.src(resources.script.libs.src)
 			.pipe(gulpIf(configuration.release, uglify()))
 			.pipe(concat(resources.script.libs.concat))
 			.pipe(gulp.dest(resources.script.libs.dist))
 			.pipe(reload({stream: true}));
-
-	var jqueryStream = gulp.src(resources.script.jquery.src)
-			.pipe(gulpIf(configuration.release, uglify()))
-			.pipe(concat(resources.script.jquery.concat))
-			.pipe(gulp.dest(resources.script.jquery.dist))
-			.pipe(reload({stream: true}));
-
-	return mergeStream(libStream, jqueryStream);
 });
 
 //endregion
@@ -217,7 +221,7 @@ gulp.task('js:lib', function () {
 //region 其他资源
 
 gulp.task('font', function () {
-	return gulp.task(resources.font.fontAwesome.src)
+	return gulp.src(resources.font.fontAwesome.src)
 			.pipe(gulp.dest(resources.font.fontAwesome.dist));
 });
 
@@ -245,11 +249,11 @@ gulp.task('img:sprite', function () {
 
 /** 编译资源文件 */
 gulp.task('compile:app', ['css:lib', 'css:app', 'js:lib', 'js:app', 'html']);
-gulp.task('compile:img', ['img:common', 'img:sprite']);
+gulp.task('compile:stable', ['img:common', 'img:sprite', 'font']);
 
 /** 清理项目 */
 gulp.task('clean:app', function () {
-	return del(['./dist', './html', './tmp']);
+	return del(['./dist/script', './dist/style', './html', './tmp']);
 });
 
 /** 清理发布目录 */
@@ -265,7 +269,8 @@ gulp.task('serve', ['compile:app'], function () {
 			directory: true, //directory listing
 			index: 'html/index.html' //index file name
 		},
-		online: false, //离线应用
+		notify: false, //不提示同步
+		online: false, //离线应用，加快启动
 		open: false, //关闭自动打开页面，避免浏览器打开太多页面。
 		reloadOnRestart: true //Browser sync 重启时重新加载页面
 	});

@@ -1,14 +1,15 @@
-.navbar {
+.sidebar {
+	color: #fff;
 	@include box-shadow($default-shadow);
 }
 
-.navbar-top {
+.sidebar-top {
 	width: 100%;
-	height: $navbar-top-height;
+	height: $sidebar-top-height;
 	background-color: $background-color-color;
-	z-index: $navbar-top-zindex;
+	z-index: $sidebar-top-zindex;
 
-	.navbar-top-fixed & {
+	.sidebar-top-fixed & {
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -16,46 +17,92 @@
 	}
 }
 
-.navbar-bottom {
-	height: $navbar-bottom-height;
-	z-index: $navbar-bottom-zindex;
+.sidebar-top-custom {
+	height: $sidebar-top-height;
+	overflow: hidden;
+	line-height: $sidebar-top-height;
+}
 
-	.navbar-bottom-fixed & {
+.sidebar-top-header {
+	width: 60%;
+	height: 100%;
+}
+
+.sidebar-top-links {
+	height: 100%;
+
+	li {
+		display: inline-block;
+		height: 100%;
+		float: left;
+
+		> a {
+			font-size: 15px;
+			padding: 20px 10px;
+		}
+
+		&:last-child {
+			margin-right: 1rem;
+		}
+	}
+}
+
+.sidebar-left-toggler {
+	margin: 16px 10px 5px 15px;
+	padding: 4px 12px;
+	float: left;
+
+	&:hover,
+	&:focus,
+	&:active {
+
+	}
+}
+
+.sidebar-bottom {
+	height: $sidebar-bottom-height;
+	z-index: $sidebar-bottom-zindex;
+
+	.sidebar-bottom-fixed & {
 		position: fixed;
 	}
 }
 
-.navbar-left {
-	width: $navbar-left-width;
+.sidebar-left {
+	width: $sidebar-left-width;
 	height: 100%;
 	background-color: $background-color-lightest;
-	top: $navbar-top-height;
+	top: $sidebar-top-height;
 	left: 0;
-	z-index: $navbar-left-zindex;
+	z-index: $sidebar-left-zindex;
 
-	.navbar-left-fixed & {
+	.sidebar-left-fixed & {
 		position: fixed;
+	}
+
+	@media (max-width: map_get($grid-breakpoints, "md")) {
+		left: -$sidebar-left-width;
 	}
 }
 
-.navbar-right {
-	width: $navbar-right-width;
+.sidebar-right {
+	width: $sidebar-right-width;
 	height: 100%;
 	background-color: $background-color-lightest;
-	top: $navbar-top-height;
+	top: $sidebar-top-height;
 	right: 0;
-	z-index: $navbar-right-zindex;
+	z-index: $sidebar-right-zindex;
 
-	.navbar-right-fixed & {
+	.sidebar-right-fixed & {
 		position: fixed;
 	}
 }
 
 .page-wrapper {
 	position: relative !important;
-	margin-top: $navbar-top-height;
-	margin-left: $navbar-left-width;
-	padding-bottom: $navbar-bottom-height;
+	margin-top: $sidebar-top-height;
+	margin-left: $sidebar-left-width;
+	padding-bottom: $sidebar-bottom-height;
 
 	@include transition(all 0.4s);
 

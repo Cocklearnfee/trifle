@@ -32,7 +32,9 @@
     "jshint": "^2.9.3",
     "merge-stream": "^1.0.0",
     "minimist": "^1.2.0",
-    "run-sequence": "^1.2.2"
+    "run-sequence": "^1.2.2",
+    "tsd": "^0.6.5",
+    "typings": "^1.4.0"
   },
   "dependencies": {
     "typescript": "^1.8.10"

@@ -5,8 +5,9 @@
 <title>{{title}} - Code by Kode</title>
 <!-- Vendor CSS -->
 <link rel="stylesheet" href="/dist/style/bootstrap.min.css">
+<link rel="stylesheet" href="/dist/style/libs.min.css">
 <!-- Application CSS -->
 <link rel="stylesheet" href="/dist/style/app.min.css">
 
 <!--<link rel="icon" type="image/png" href="http://v4-alpha.getbootstrap.com/favicon.ico">-->
-<link rel="icon" type="image/png" href="../dist/image/logo.ico">
+<link rel="icon" type="image/png" href="/dist/image/logo.ico">

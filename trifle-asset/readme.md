@@ -11,6 +11,7 @@
 	`npm install -g cnpm --registry=https://registry.npm.taobao.org //安装 cnpm`
 	之后所有用到 npm 的，可以替换为 cnpm 执行。
 - 根据项目中的 `bower.json` 执行命令 `bower install` 安装项目开发依赖。
+- 使用 typescript 开发脚本 `typings install` 安装 `typings.json` 中安装的 `*.d.ts` 依赖
 
 #### 文件结构说明
 - app - 开发文件夹，包括各种源资源文件

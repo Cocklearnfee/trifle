@@ -9,19 +9,19 @@
 
 <!--页面包装-->
 {{!--
-navbar-left-fixed: 固定左侧导航
-navbar-right-fixed: 固定右侧导航
-navbar-top-fixed: 固定顶部导航
-navbar-bottom-fixed: 固定底部导航
+sidebar-left-fixed: 固定左侧导航
+sidebar-right-fixed: 固定右侧导航
+sidebar-top-fixed: 固定顶部导航
+sidebar-bottom-fixed: 固定底部导航
 --}}
-<div class="wrapper navbar-left-fixed navbar-right-fixed navbar-top-fixed">
+<div class="wrapper sidebar-left-fixed sidebar-right-fixed sidebar-top-fixed">
 
-	{{> navbar-left}}
+	{{> sidebar-left active=Dashboard-v.1.0}}
 
 	<!--页面主体-->
 	<div class="page-wrapper">
 
-		{{> navbar-top}}
+		{{> sidebar-top}}
 
 		<div class="page-header">
 			<div class="row">
@@ -58,7 +58,6 @@ navbar-bottom-fixed: 固定底部导航
 					</div>
 				</div>
 
-
 				<div class="col-lg-4">
 					<div class="card">
 						<div class="card-header">
@@ -78,7 +77,7 @@ navbar-bottom-fixed: 固定底部导航
 
 		</div>
 
-		{{> navbar-bottom}}
+		{{> sidebar-bottom}}
 
 	</div>
 
