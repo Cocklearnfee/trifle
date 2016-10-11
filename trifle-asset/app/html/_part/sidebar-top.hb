@@ -13,7 +13,7 @@
 			<a class="nav-link" data-toggle="dropdown">
 				<i class="fa fa-bell"></i>通知
 			</a>
-			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+			<div class="dropdown-menu dropdown-menu-right">
 				<a class="dropdown-item" href="#">Another action</a>
 				<a class="dropdown-item" href="#">Something else here</a>
 				<div class="dropdown-divider"></div>
@@ -25,7 +25,7 @@
 			<a class="nav-link" data-toggle="dropdown">
 				<i class="fa fa-cog"></i>设置
 			</a>
-			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+			<div class="dropdown-menu dropdown-menu-right">
 				<a class="dropdown-item" href="#">Another action</a>
 				<a class="dropdown-item" href="#">Something else here</a>
 				<div class="dropdown-divider"></div>
@@ -37,7 +37,7 @@
 			<a class="nav-link" data-toggle="dropdown">
 				<i class="fa fa-files-o"></i>主题
 			</a>
-			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+			<div class="dropdown-menu dropdown-menu-right">
 				<a class="dropdown-item" href="#">Another action</a>
 				<a class="dropdown-item" href="#">Something else here</a>
 				<div class="dropdown-divider"></div>

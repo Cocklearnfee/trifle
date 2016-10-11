@@ -1,0 +1,9 @@
+@mixin plate-variant($background-color) {
+	> {
+		.plate-header, .plate-content, .plate-footer {
+			&.plate-bg {
+				background-color: $background-color;
+			}
+		}
+	}
+}

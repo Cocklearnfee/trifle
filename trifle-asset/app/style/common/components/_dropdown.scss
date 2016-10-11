@@ -1,0 +1,23 @@
+.dropdown-menu {
+	font-size: $dropdown-font-size;
+	animation-name: fadeIn;
+	animation-duration: 300ms;
+	animation-fill-mode: both;
+
+	.dropdown-item {
+		display: block;
+		padding: 3px 20px;
+		clear: both;
+		font-weight: 400;
+		line-height: $line-height-base;
+		color: #333;
+		white-space: nowrap;
+		transition: background-color 0.3ms;
+
+		&:hover {
+			text-decoration: none;
+			color: #333;
+			background-color: rgba(0, 0, 0, .075);
+		}
+	}
+}

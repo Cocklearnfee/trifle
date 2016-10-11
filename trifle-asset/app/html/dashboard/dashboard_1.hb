@@ -4,13 +4,13 @@
 	{{> body-header}}
 </head>
 <body>
-{{> page-header}}
+{{> sidebar-top}}
 <div class="content">
 	Test handlebars 1233 I have a dream!!
 	<br>
 	中文字体显示测试。默认中文字体显示
 </div>
-{{> page-footer}}
+{{> sidebar-bottom}}
 {{> body-footer}}
 </body>
 </html>

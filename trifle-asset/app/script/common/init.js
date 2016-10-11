@@ -6,7 +6,7 @@ var PageInit = (function () {
 	 * 初始化菜单
 	 */
 	PageInit.initMenu = function () {
-		$(".menu").metisMenu({});
+		$(".metismenu").metisMenu({});
 	};
 
 	/**

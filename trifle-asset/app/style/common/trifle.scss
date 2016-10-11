@@ -6,14 +6,20 @@
 @import "mixins";
 //重载其他插件库样式
 @import "overrides/override-bootstrap";
+@import "overrides/override-metismenu";
 //加载组件样式
 @import "components/button";
 @import "components/common";
 @import "components/card";
+@import "components/dropdown";
 @import "components/layout";
+@import "components/plate";
+@import "components/label";
 
 @import "components/nav";
 @import "components/navbar";
+
+@import "components/transition";
 
 
 
@@ -21,3 +27,4 @@
 
 //加载工具
 @import "utilities/visible";
+@import "utilities/edge";

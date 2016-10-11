@@ -11,85 +11,174 @@
 	},
 	"menus": [
 		{
-			"title": "Dashboard",
+			"title": "概览",
 			"icon": "fa fa-diamond",
 			"href": "/html/index.html",
 			"menus": [
 				{
-					"title": "Dashboard-v.1.0",
+					"title": "概览-v.1.0",
 					"href": "/html/index.html"
 				},
 				{
-					"title": "Dashboard-v.2.0",
+					"title": "概览-v.2.0",
 					"href": "/html/index.html"
-				},{
-					"title": "Dashboard-v.3.0",
+				}
+			]
+		},
+		{
+			"title": "布局",
+			"icon": "fa fa-th-large",
+			"href": "/html/layout.html"
+		},
+		{
+			"title": "元素",
+			"icon": "fa fa-diamond",
+			"menus": [
+				{
+					"title": "Plate",
+					"href": "/html/plate.html"
+				},
+				{
+					"title": "颜色",
 					"href": "/html/index.html"
 				},
 				{
-					"title": "Dashboard-v.4.0",
+					"title": "按钮",
+					"href": "/html/index.html"
+				},
+				{
+					"title": "字体图标",
+					"menus": [
+						{
+							"title": "FontAwesome",
+							"href": "/html/element/font-awesome.html"
+						},
+						{
+							"title": "Glyphicons",
+							"href": "/html/element/glyphicons.html"
+						},
+						{
+							"title": "Iconfont",
+							"href": "/html/element/iconfont.html"
+						}
+					]
+				}
+			]
+		},
+		{
+			"title": "表单",
+			"icon": "fa fa-diamond",
+			"menus": [
+				{
+					"title": "基础表单",
+					"href": "/html/index.html"
+				},
+				{
+					"title": "文件上传表单",
+					"href": "/html/index.html"
+				},
+				{
+					"title": "富文本表单",
 					"href": "/html/index.html"
 				}
 			]
 		},
 		{
-			"title": "Layout",
+			"title": "表格",
 			"icon": "fa fa-th-large",
-			"href": "/html/layout.html"
-		},
-		{
-			"title": "Dashboard",
-			"icon": "fa fa-diamond",
-			"href": "/html/index.html",
 			"menus": [
 				{
-					"title": "Dashboard v.1.0",
+					"title": "基础表格"
+				},
+				{
+					"title": "高级表格"
+				},
+				{
+					"title": "静态表格"
+				},
+				{
+					"title": "DataTable"
+				}
+			]
+		},
+		{
+			"title": "组合",
+			"icon": "fa fa-diamond",
+			"menus": [
+				{
+					"title": "邮件",
+					"menus": [
+						{
+							"title": "邮件列表",
+							"href": ""
+						},
+						{
+							"title": "写邮件",
+							"href": ""
+						}
+					]
+				},
+				{
+					"title": "商城",
+					"menus": [
+						{
+							"title": "商品列表"
+						},
+						{
+							"title": "修改商品"
+						},
+						{
+							"title": "购物车"
+						},
+						{
+							"title": "支付"
+						}
+					]
+				}
+			]
+		},
+		{
+			"title": "图表",
+			"icon": "fa fa-diamond",
+			"menus": [
+				{
+					"title": "Flot",
+					"href": "/html/index.html"
+				},
+				{
+					"title": "ECharts",
 					"href": "/html/index.html"
 				}
 			]
 		},
 		{
-			"title": "Dashboard",
-			"icon": "fa fa-diamond",
-			"href": "/html/index.html",
-			"menus": [
-				{
-					"title": "Dashboard v.1.0",
-					"href": "/html/index.html"
-				}
-			]
+			"title": "动画",
+			"icon": "fa fa-cube",
+			"href": "/html/animate.html"
 		},
 		{
-			"title": "Dashboard",
-			"icon": "fa fa-diamond",
-			"href": "/html/index.html",
-			"menus": [
-				{
-					"title": "Dashboard v.1.0",
-					"href": "/html/index.html"
-				}
-			]
-		},
-		{
-			"title": "Layout",
+			"title": "页面",
 			"icon": "fa fa-th-large",
-			"href": "/html/layout.html"
-		},
-		{
-			"title": "Dashboard",
-			"icon": "fa fa-diamond",
-			"href": "/html/index.html",
 			"menus": [
 				{
-					"title": "Dashboard v.1.0",
-					"href": "/html/index.html"
+					"title": "404"
+				},
+				{
+					"title": "登陆"
+				},
+				{
+					"title": "个人"
+				},
+				{
+					"title": "联系人"
+				},
+				{
+					"title": "日历"
+				},
+				{
+					"title": "文章"
 				}
 			]
-		},
-		{
-			"title": "Layout",
-			"icon": "fa fa-th-large",
-			"href": "/html/layout.html"
 		}
 	],
 	"index": {

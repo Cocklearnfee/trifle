@@ -10,51 +10,46 @@
 //region 通用定义， colors fonts body
 
 //各种灰度颜色
-$color-darkest: #333 !default; //最黑，不宜用 #000，和白色的背景对比过大
-$color-darker: #676a6c !default; //default font color
-$color-dark: #888 !default; //sub header color
-$color-base: #e3e7e8 !default; //border color
-$color-light: #f3f3f4 !default; //background color
-$color-lighter: #f8f8f9 !default; //lighter background color
-$color-lightest: #fff !default; //lightest background color
+$color-darkest: 					#333 !default; //最黑，不宜用 #000，和白色的背景对比过大
+$color-darker: 						#676a6c !default; //default font color
+$color-dark: 						#888 !default; //sub header color
+$color-base: 						#e3e7e8 !default; //border color
+$color-light: 						#f3f3f4 !default; //background color
+$color-lighter: 					#f8f8f9 !default; //lighter background color
+$color-lightest: 					#fff !default; //lightest background color
 
 //brand colors
-$brand-default: #fff !default;
-$brand-primary: #1ab394 !default;
-$brand-success: #1c84c6 !default;
-$brand-info: #23c6c8 !default;
-$brand-warning: #f8ac59 !default;
-$brand-danger: #ed5565 !default;
+$brand-default: 					#fff !default;
+$brand-primary: 					#1ab394 !default;
+$brand-success: 					#1c84c6 !default;
+$brand-info: 						#23c6c8 !default;
+$brand-warning: 					#f8ac59 !default;
+$brand-danger: 						#ed5565 !default;
 
 //灰色背景颜色，不宜细分过度
-$background-color-lightest: $color-lightest !default; //white background color
-$background-color-lighter: $color-lighter !default; //light gray background color
-$background-color-base: $color-light !default; //background for whole page
-$background-color-color: $brand-primary !default; //background color for theme
+$background-color-lightest: 		$color-lightest !default; //white background color
+$background-color-lighter: 			$color-lighter !default; //light gray background color
+$background-color-base: 			$color-light !default; //background for whole page
+$background-color-color: 			$brand-primary !default; //background color for theme
 
 //fonts and sizes
-$font-color-base:  $color-darkest !default; //default font color
-$font-color-light: $color-darker !default; //light font color
-$font-family-base: "Open Sans", "Microsoft Yahei", sans-serif !default; //default font family
-$font-size-base: 13px !default; //default font size
-$line-height-base: 1.5 !default; //default line height
+$font-color-base:  					$color-darkest !default; //default font color
+$font-color-light: 					$color-darker !default; //light font color
+$font-color-lighter:				$color-light !default;
+$font-family-base: 					"Open Sans", "Microsoft Yahei", sans-serif !default; //default font family
+$font-size-base: 					13px !default; //default font size
+$line-height-base: 					1.5 !default; //default line height
 
 //options
-$enable-rounded: true !default; //是否允许圆角，必须允许圆角才能取消 bootstrap 的默认圆角
-$enable-shadows: true !default; //是否允许阴影。
-$enable-transitions: true !default; //transitions
+$enable-rounded: 					true !default; //是否允许圆角，必须允许圆角才能取消 bootstrap 的默认圆角
+$enable-shadows: 					true !default; //是否允许阴影。
+$enable-transitions: 				true !default; //transitions
 
-$default-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-0 3px 1px -2px rgba(0, 0, 0, 0.2),
-0 1px 5px 0 rgba(0, 0, 0, 0.12) !default;
-
-$grid-breakpoints: (
-		xs: 0,
-		sm: 544px,
-		md: 768px,
-		lg: 992px,
-		xl: 1200px
-) !default;
+$default-border:					1px solid rgba(0, 0, 0, 0.125) !default;
+//0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12)
+//0 2px 5px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 -1px 2px 0px rgba(0, 0, 0, 0.12)
+$default-shadow: 					0 2px 5px 0 rgba(0, 0, 0, 0.14), 0 3px 3px -2px rgba(0, 0, 0, 0.2), 0 -1px 2px 0px rgba(0, 0, 0, 0.12) !default;
+$grid-breakpoints: 					(xs: 0, sm: 544px, md: 768px, lg: 992px, xl: 1200px) !default;
 
 //endregion
 
@@ -62,56 +57,87 @@ $grid-breakpoints: (
 
 //link
 
-$link-color:            $brand-primary !default;
-$link-decoration:       none !default;
-$link-hover-color:      darken($link-color, 15%) !default;
-$link-hover-decoration: underline !default;
+$link-color:            			$brand-primary !default;
+$link-decoration:       			none !default;
+$link-hover-color:      			darken($link-color, 15%) !default;
+$link-hover-decoration: 			underline !default;
 
 //button
 
-$btn-primary-color:              #fff !default;
-$btn-primary-bg:                 $brand-primary !default;
-$btn-primary-border:             $btn-primary-bg !default;
+$btn-primary-color: 				#fff !default;
+$btn-primary-bg:   					$brand-primary !default;
+$btn-primary-border:				$btn-primary-bg !default;
 
-$btn-secondary-color:            $color-darkest !default;
-$btn-secondary-bg:               #fff !default;
-$btn-secondary-border:           #ccc !default;
+$btn-secondary-color:          		$color-darkest !default;
+$btn-secondary-bg:               	#fff !default;
+$btn-secondary-border:           	#ccc !default;
 
-$btn-info-color:                 #fff !default;
-$btn-info-bg:                    $brand-info !default;
-$btn-info-border:                $btn-info-bg !default;
+$btn-info-color:					#fff !default;
+$btn-info-bg:                   	$brand-info !default;
+$btn-info-border:               	$btn-info-bg !default;
 
-$btn-success-color:              #fff !default;
-$btn-success-bg:                 $brand-success !default;
-$btn-success-border:             $btn-success-bg !default;
+$btn-success-color:             	#fff !default;
+$btn-success-bg:                	$brand-success !default;
+$btn-success-border:            	$btn-success-bg !default;
 
-$btn-warning-color:              #fff !default;
-$btn-warning-bg:                 $brand-warning !default;
-$btn-warning-border:             $btn-warning-bg !default;
+$btn-warning-color:             	#fff !default;
+$btn-warning-bg:                	$brand-warning !default;
+$btn-warning-border:            	$btn-warning-bg !default;
 
-$btn-danger-color:               #fff !default;
-$btn-danger-bg:                  $brand-danger !default;
-$btn-danger-border:              $btn-danger-bg !default;
+$btn-danger-color:              	#fff !default;
+$btn-danger-bg:                 	$brand-danger !default;
+$btn-danger-border:             	$btn-danger-bg !default;
 
-$btn-link-disabled-color:        $color-darker !default;
+$btn-link-disabled-color:       	$color-darker !default;
 
-//sidebar-top
-$sidebar-top-height: 60px !default;
-$sidebar-top-zindex: 100 !default;
+//plate
+$plate-margin:                  	0 0 25px 0 !default;
+$plate-padding:                 	0 0 0 0 !default;
+$plate-border:						$default-border !default;
+$plate-header-padding:				15px 20px !default;
+$plate-header-border:				$default-border !default;
+$plate-header-background:			#f5f5f5 !default;
+$plate-content-padding:				15px 20px 20px !default;
+$plate-footer-border:				$default-border !default;
 
-//sidebar-bottom
-$sidebar-bottom-height: 40px !default;
-$sidebar-bottom-zindex: 80 !default;
+$plate-default-bg:					#f5f5f5 !default;
+$plate-primary-bg:            		$brand-primary !default;
+$plate-success-bg:            		$brand-success !default;
+$plate-info-bg:               		$brand-info !default;
+$plate-warning-bg:            		$brand-warning !default;
+$plate-danger-bg:             		$brand-danger !default;
 
-//sidebar-left
-$sidebar-left-width: 220px !default;
-$sidebar-left-zindex: 60 !default;
+//label
+$label-color:						#fff !default;
+$label-link-hover-color:			#fff !default;
+$label-padding:						4px 8px !default;
+$label-border-radius:				.25em !default;
 
-//sidebar-right
-$sidebar-right-width: 260px !default;
-$sidebar-right-zindex: 50 !default;
+$label-default-bg:            		$color-dark !default;
+$label-primary-bg:            		$brand-primary !default;
+$label-success-bg:            		$brand-success !default;
+$label-info-bg:               		$brand-info !default;
+$label-warning-bg:            		$brand-warning !default;
+$label-danger-bg:             		$brand-danger !default;
 
-//page-content
-$page-content-padding: 20px !default;
+//dropdown
+$dropdown-font-size:				$font-size-base !default;
+
+//sidebar
+$sidebar-top-height: 				60px !default;
+$sidebar-top-zindex: 				100 !default;
+
+$sidebar-bottom-height: 			40px !default;
+$sidebar-bottom-zindex: 			80 !default;
+
+$sidebar-left-width: 				220px !default;
+$sidebar-left-zindex: 				60 !default;
+
+$sidebar-right-width: 				260px !default;
+$sidebar-right-zindex: 				50 !default;
+
+//page
+$page-header-padding:				0 25px 20px !default;
+$page-content-padding: 				30px 35px !default;
 
 //endregion

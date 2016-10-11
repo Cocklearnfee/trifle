@@ -1,0 +1,20 @@
+@for $i from 1 through 10 {
+	$edge: $i * 5;
+	.m-#{$edge} {
+		margin: $edge * 1px !important;
+	}
+	.p-#{$edge} {
+		padding: $edge * 1px !important;
+	}
+
+	$edgeDir: (t: top, b: bottom, l: left, r: right);
+	@each $short, $full in $edgeDir {
+		.m-#{$short}-#{$edge} {
+			margin-#{$full}: $edge * 1px !important;
+		}
+
+		.p-#{$short}-#{$edge} {
+			padding-#{$full}: $edge * 1px !important;
+		}
+	}
+}

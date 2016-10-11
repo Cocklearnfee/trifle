@@ -40,11 +40,70 @@ var configuration = parseArgs(process.argv.slice(2), {
 	}
 });
 
-//资源配置
+//region 网页资源配置
 var resources = {
 	html: { //网页
-		page: { //页面配置
+		engine: { //handlebars 配置信息
+			ignorePartial: true, //忽略找不到的模板
 			batch: ['./app/html/_part'], //handlebars 组件位置
+			helpers: {
+				menuContains: function (menus, current, options) { // 该 helper 支持多级菜单。
+					var result = false;
+
+					function containsMenu(menus, current) {
+						if (menus && menus.length) {
+							for (var i = 0, j = menus.length; i < j; i++) {
+								if (menus[i]['title'] == current) {
+									result = true;
+									break;
+								} else {
+									containsMenu(menus[i]['menus'], current);
+								}
+							}
+						}
+					}
+
+					containsMenu(menus, current);
+
+					if (result) {
+						return options.fn(this);
+					} else {
+						return options.inverse(this);
+					}
+				},
+				compare: function (left, operator, right, options) {
+					if (arguments.length < 3) {
+						throw new Error('Handlerbars Helper "compare" needs 2 parameters');
+					}
+					var operators = {
+						//@formatter:off
+						'==': function (l, r) { return l == r; },
+						'===': function (l, r) { return l === r; },
+						'!=': function (l, r) { return l != r; },
+						'!==': function (l, r) { return l !== r; },
+						'<': function (l, r) { return l < r; },
+						'>': function (l, r) { return l > r; },
+						'<=': function (l, r) { return l <= r; },
+						'>=': function (l, r) { return l >= r; },
+						'typeof': function (l, r) { return typeof l == r; }
+						//@formatter:on
+					};
+
+					if (!operators[operator]) {
+						throw new Error('Handlerbars Helper "compare" doesn\'t know the operator ' + operator);
+					}
+
+					var result = operators[operator](left, right);
+
+					if (result) {
+						return options.fn(this);
+					} else {
+						return options.inverse(this);
+					}
+				}
+			}
+		},
+		page: { //页面配置
 			src: ['./app/html/**/*.hb', '!./app/html/_part/**/*.hb'], //handlebars 文件位置
 			dist: './html', //目标位置
 			watch: ['./app/html/**/*.hb']
@@ -112,6 +171,7 @@ var resources = {
 		}
 	}
 };
+//endregion
 
 //region 资源文件编译压缩
 
@@ -119,13 +179,8 @@ var resources = {
 
 /** handlebars 模板编译 */
 gulp.task('html', function () {
-	var options = {
-		ignorePartials: true, //忽略找不到的模板
-		batch: resources.html.page.batch
-	};
-
 	return gulp.src(resources.html.page.src)
-			.pipe(handlebars(handlebars_data, options))
+			.pipe(handlebars(handlebars_data, resources.html.engine))
 			.on('error', gulpUtil.log)
 			.pipe(rename({extname: '.html'}))
 			.pipe(gulp.dest(resources.html.page.dist));
