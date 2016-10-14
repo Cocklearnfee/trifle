@@ -16,7 +16,7 @@ sidebar-bottom-fixed: 固定底部导航
 --}}
 <div class="wrapper sidebar-left-fixed sidebar-right-fixed sidebar-top-fixed">
 
-	{{> sidebar-left active="概览-v.1.0"}}
+	{{> sidebar-left active=""}}
 
 	<!--页面主体-->
 	<div class="page-wrapper">
@@ -26,11 +26,11 @@ sidebar-bottom-fixed: 固定底部导航
 		<div class="page-header">
 			<div class="row">
 				<div class="col-lg-10">
-					<h4 class="page-header-title">Basic Form</h4>
+					<h4 class="page-header-title">导航页面</h4>
 
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item"><a href="#">二级标题</a></li>
+						<li class="breadcrumb-item"><a href="#">首页</a></li>
+						<li class="breadcrumb-item"><a href="#">二级页面</a></li>
 						<li class="breadcrumb-item active"><strong>当前页面</strong></li>
 					</ol>
 				</div>
@@ -38,7 +38,20 @@ sidebar-bottom-fixed: 固定底部导航
 			</div>
 		</div>
 
-		<div class="page-content container-fluid">
+		<div class="page-content">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="plate">
+						<div class="plate-header">
+							<span class="plate-title">快速导航</span>
+						</div>
+						<div class="plate-content">
+
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<div class="row">
 				<div class="col-lg-4">
 					<div class="plate plate-default">

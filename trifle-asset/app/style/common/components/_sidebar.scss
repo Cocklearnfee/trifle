@@ -1,0 +1,148 @@
+.sidebar {
+	color: #fff;
+	@include box-shadow($default-shadow);
+}
+
+.sidebar-top {
+	width: 100%;
+	height: $sidebar-top-height;
+	background-color: $background-color-color;
+	z-index: $sidebar-top-zindex;
+
+	.sidebar-top-fixed & {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+	}
+}
+
+.sidebar-top-custom {
+	height: $sidebar-top-height;
+	overflow: hidden;
+	line-height: $sidebar-top-height;
+}
+
+.sidebar-top-header {
+	width: 60%;
+	height: 100%;
+}
+
+.sidebar-top-links {
+	height: 100%;
+
+	.nav-item {
+		display: inline-block;
+		height: 100%;
+		float: left;
+
+		+ .nav-item {
+			margin-left: 0;
+		}
+
+		> a {
+			font-size: 14px;
+			padding: 20px 10px;
+		}
+
+		&:last-child {
+			margin-right: 1rem;
+		}
+	}
+}
+
+.sidebar-left-toggler {
+	margin: 16px 10px 5px 15px;
+	padding: 4px 12px;
+	float: left;
+
+	&:hover,
+	&:focus,
+	&:active {
+
+	}
+}
+
+.sidebar-bottom {
+	height: $sidebar-bottom-height;
+	z-index: $sidebar-bottom-zindex;
+
+	.sidebar-bottom-fixed & {
+		position: fixed;
+	}
+}
+
+.sidebar-left {
+	width: $sidebar-left-width;
+	height: 100%;
+	background-color: $background-color-lightest;
+	top: $sidebar-top-height;
+	left: 0;
+	z-index: $sidebar-left-zindex;
+
+	.sidebar-left-fixed & {
+		position: fixed;
+	}
+
+	@media (max-width: map_get($grid-breakpoints, "md")) {
+		left: -$sidebar-left-width;
+	}
+
+	.logo-element {
+		display: none;
+	}
+
+	.nav {
+		> li {
+
+			&.active {
+				background: $background-color-lighter;
+
+				> a {
+					font-weight: 600;
+				}
+			}
+		}
+
+		&:not(.nav-second-level) > li {
+			&.active {
+				border-left: 4px solid $brand-primary;
+			}
+		}
+	}
+
+	.nav-header {
+		padding: 33px 25px;
+		background-color: $color-base;
+		background-image: url('../image/profile-bg.png');
+
+	}
+
+	.nav-link {
+		color: $font-color-base;
+		padding: 12px 20px 12px 25px;
+
+		&:hover {
+			font-weight: 700;
+		}
+	}
+}
+
+.profile-element {
+	> a {
+		color: $font-color-lighter;
+	}
+}
+
+.sidebar-right {
+	width: $sidebar-right-width;
+	height: 100%;
+	background-color: $background-color-lightest;
+	top: $sidebar-top-height;
+	right: 0;
+	z-index: $sidebar-right-zindex;
+
+	.sidebar-right-fixed & {
+		position: fixed;
+	}
+}

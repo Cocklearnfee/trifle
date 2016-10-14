@@ -35,11 +35,17 @@
 		margin-left: 4px;
 	}
 
+	&::after {
+		content: "";
+		display: table;
+		clear: both;
+	}
 }
 
 .plate-title {
 	display: inline-block;
 	font-size: 16px;
+	margin: 0;
 	padding: 0;
 	text-overflow: ellipsis;
 	float: left;
@@ -70,28 +76,4 @@
 		margin-left: 5px;
 		color: #c4c4c4;
 	}
-}
-
-.plate-default {
-	@include plate-variant($plate-default-bg);
-}
-
-.plate-primary {
-	@include plate-variant($plate-primary-bg);
-}
-
-.plate-success {
-	@include plate-variant($plate-success-bg);
-}
-
-.plate-info {
-	@include plate-variant($plate-info-bg);
-}
-
-.plate-warning {
-	@include plate-variant($plate-warning-bg);
-}
-
-.plate-danger {
-	@include plate-variant($plate-danger-bg);
 }

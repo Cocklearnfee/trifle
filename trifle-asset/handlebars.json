@@ -28,7 +28,16 @@
 		{
 			"title": "布局",
 			"icon": "fa fa-th-large",
-			"href": "/html/layout.html"
+			"menus": [
+				{
+					"title": "布局",
+					"href": "/html/layout/layout.html"
+				},
+				{
+					"title": "定位",
+					"href": "/html/layout/position.html"
+				}
+			]
 		},
 		{
 			"title": "元素",

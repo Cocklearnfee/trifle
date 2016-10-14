@@ -12,11 +12,13 @@
 	}
 }
 
+.nav-link {
+	@include transition(background-color linear .15s, color linear .15s);
+}
+
 .nav-pills .nav-link {
 	@include border-radius(0);
 }
-
-
 
 .nav-second-level, .nav-third-level {
 	.nav-link {

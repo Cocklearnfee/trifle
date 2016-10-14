@@ -1,0 +1,9 @@
+$colors: (default: $brand-default,
+		primary: $brand-primary,
+		info: $brand-info,
+		warning: $brand-warning,
+		danger: $brand-danger
+);
+@each $name, $bgc in $colors {
+	@include bgc($name, $bgc);
+}

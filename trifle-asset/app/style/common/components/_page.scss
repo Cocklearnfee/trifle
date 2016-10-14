@@ -1,0 +1,26 @@
+.page-wrapper {
+	position: relative !important;
+	margin-top: $sidebar-top-height;
+	margin-left: $sidebar-left-width;
+	padding-bottom: $sidebar-bottom-height;
+
+	@include transition(all 0.4s);
+
+	@media (max-width: map_get($grid-breakpoints, "sm")) {
+		margin-left: 0;
+	}
+}
+
+.page-header {
+	padding: $page-header-padding;
+	background-color: $background-color-lightest;
+	@include box-shadow($default-shadow);
+
+	.page-header-title {
+		margin-bottom: 10px;
+	}
+}
+
+.page-content {
+	padding: $page-content-padding;
+}

@@ -14,10 +14,10 @@
 				<i class="fa fa-bell"></i>通知
 			</a>
 			<div class="dropdown-menu dropdown-menu-right">
-				<a class="dropdown-item" href="#">Another action</a>
-				<a class="dropdown-item" href="#">Something else here</a>
+				<a class="dropdown-item" href="#">全部通知</a>
+				<a class="dropdown-item" href="#">未读通知</a>
 				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#">Separated link</a>
+				<a class="dropdown-item" href="#">清空提示</a>
 			</div>
 		</li>
 
@@ -26,10 +26,10 @@
 				<i class="fa fa-cog"></i>设置
 			</a>
 			<div class="dropdown-menu dropdown-menu-right">
-				<a class="dropdown-item" href="#">Another action</a>
-				<a class="dropdown-item" href="#">Something else here</a>
+				<a class="dropdown-item" href="#">个人设置</a>
+				<a class="dropdown-item" href="#">消息设置</a>
 				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#">Separated link</a>
+				<a class="dropdown-item" href="#">系统设置</a>
 			</div>
 		</li>
 
@@ -38,10 +38,10 @@
 				<i class="fa fa-files-o"></i>主题
 			</a>
 			<div class="dropdown-menu dropdown-menu-right">
-				<a class="dropdown-item" href="#">Another action</a>
-				<a class="dropdown-item" href="#">Something else here</a>
+				<a class="dropdown-item" href="#">选择主题</a>
+				<a class="dropdown-item" href="#">自定义主题</a>
 				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#">Separated link</a>
+				<a class="dropdown-item" href="#">购买主题</a>
 			</div>
 		</li>
 
